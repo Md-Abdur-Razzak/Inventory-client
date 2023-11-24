@@ -1,24 +1,63 @@
 import { useLoaderData } from "react-router-dom";
+import PublicApi from "../../../Hook/PublicApi";
+import { userimage } from "../../../utis/imageUplode";
+import { toast } from "react-toastify";
 
 
 const UpdateProduct = () => {
     const data=useLoaderData()
+    const axoisPublic = PublicApi()
     const  {
+        _id,
         shopName,
         quantity,
         shopInfo,
         shopArea,
         ProductionCost,
         display_url,
-   
         ProfitMargin,
         Discount,
-       
-        BuyingPrice
+       BuyingPrice
     
         
      
       }=data || {}
+
+      const handelAddData = async(e)=>{
+        e.preventDefault();
+        
+        const from = e.target;
+        const shopName = from.shopName.value;
+        const quantity = from.Quantity.value;
+        const shopInfo = from.shopInfo.value;
+        const shopArea = from.shopArea.value;
+        const ProductionCost = from.ProductionCost.value;
+        const ProfitMargin = parseInt(from.ProfitMargin.value);
+        const Discount = from.Discount.value;
+        const  BuyingPrice = parseInt(from. BuyingPrice.value)
+        const logo = from.image.files[0];
+        const {display_url} =await  userimage(logo)
+
+      const updateData = {
+             shopName,
+            quantity,
+            shopInfo,
+            shopArea,
+            ProductionCost,
+            display_url,
+            ProfitMargin,
+            Discount,
+           BuyingPrice,
+           
+           
+        }
+       const {data} = await axoisPublic.patch(`/shopProductUpdate/${_id}`,updateData)
+       if (data.matchedCount>0) {
+        return toast.success("Product Update successfully ")
+       }
+        
+        
+      }
     return (
         <div>
         <div className="form-control">
@@ -28,7 +67,7 @@ const UpdateProduct = () => {
                 <h1 className="text-5xl font-bold">Products add </h1>
               </div>
               <div className="card flex-shrink-0 w-full  shadow-2xl bg-base-100">
-                <form onSubmit={'handelAddData'} className="card-body">
+                <form onSubmit={handelAddData} className="card-body">
                   <div className="md:flex justify-between md:gap-4">
                     <div className="form-control w-full">
                       <label className="label">
@@ -141,7 +180,7 @@ const UpdateProduct = () => {
                       <label className="label">
                         <span className="label-text">Shop image</span>
                       </label>
-                      <input type="file" name="image" defaultValue={  display_url} required />
+                      <input type="file" name="image"  required />
                     </div>
                   </div>
                   <div className="form-control mt-6">
