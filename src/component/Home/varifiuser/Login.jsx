@@ -1,29 +1,40 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { MyContext } from "../../../Route/AuthProvider";
+import { toast } from "react-toastify";
+import PublicApi from "../../../Hook/PublicApi";
 
 
 const Login = () => {
-    
-//     const {singWithEmailAndPassword}=useContext(MyContext)
-//    // const navigator = useNavigate()
-//    // const singLocation = useLocation()
-//    const handelLogin = (e) =>{
-//     e.preventDefault()
-//     const email = e.target.email.value
-//     const password = e.target.password.value
-
-//   singWithEmailAndPassword(email,password)
-// .then((res)=>{
- 
- 
-//     //navigator(singLocation?.state? singLocation.state :"/")
-//    return toast.success("Log In success")
-     
-// })
-// .catch((error)=>{
-//  toast.error("Invalid Email And Password")
    
-// })
-//    }
+    const publicAxios = PublicApi()
+    const {singWithEmailAndPassword}=useContext(MyContext)
+    const navigator = useNavigate()
+   // const singLocation = useLocation()
+   const handelLogin = (e) =>{
+    e.preventDefault()
+    const email = e.target.email.value
+    const password = e.target.password.value
+
+  singWithEmailAndPassword(email,password)
+.then((res)=>{
+ 
+    publicAxios.get(`/user?email=${res.user.email}`)
+    .then(res=>{
+        if(res.data.dasbord){
+            navigator('/dasbord/projectManaget')
+        }
+    })
+    //navigator(singLocation?.state? singLocation.state :"/")
+   return toast.success("Log In success")
+     
+})
+.catch((error)=>{
+    console.log(error);
+ toast.error("Invalid Email And Password")
+   
+})
+   }
 
 
     return (
@@ -38,7 +49,7 @@ const Login = () => {
           
           </div>
           <div className="card  border border-3 border-cyan-700 flex-shrink-0 md:w-full    shadow-2xl bg-base-100 mt-3">
-          <form onSubmit={'handelLogin'}>
+          <form onSubmit={handelLogin}>
           <div className="card-body">
               <div className="form-control ">
                 <label className="label">

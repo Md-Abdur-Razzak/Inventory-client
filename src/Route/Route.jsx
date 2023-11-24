@@ -3,7 +3,10 @@ import Maincontainer from "../component/container/Maincontainer";
 import Home from "../component/Home/Home";
 import Registration from "../component/Home/varifiuser/Registration";
 import Login from "../component/Home/varifiuser/Login";
-import CreateStore from "../component/Home/varifiuser/CreateStore/CreateStore";
+import CreateStore from "../component/Home/CreateStore/CreateStore";
+import PrivateRoute from "./PrivateRoute";
+import DashbordContainer from "../component/DasBord/DashbordContainer";
+import ProjectManagement from "../component/DasBord/UserDasBord/ProjectManagement";
 
 export const myRoute = createBrowserRouter([{
     path:"/",
@@ -23,7 +26,20 @@ export const myRoute = createBrowserRouter([{
         },
         {
             path:'/Create-Store',
-            element:<CreateStore></CreateStore>
+            element:<PrivateRoute><CreateStore></CreateStore></PrivateRoute>
         }
     ]
-}])
+    
+},
+{
+    path:"/dasbord",
+    element:<DashbordContainer></DashbordContainer>,
+    children:[
+        {
+            path:"/dasbord/projectManaget",
+            element:<ProjectManagement></ProjectManagement>
+        }
+    ]
+}
+
+])

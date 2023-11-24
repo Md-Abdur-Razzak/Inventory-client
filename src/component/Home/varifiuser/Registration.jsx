@@ -3,18 +3,21 @@ import { Link, useNavigate } from "react-router-dom";
 import { MyContext } from "../../../Route/AuthProvider";
 import { toast } from "react-toastify";
 import { updateProfile } from "firebase/auth";
+import { userimage } from "../../../utis/imageUplode";
+import PublicApi from "../../../Hook/PublicApi";
 
 
 const Registration = () => {
     const {creatEmilAndPassword}=useContext(MyContext)
     const navigate = useNavigate()
+    const publicAxios = PublicApi()
    
-    const handelRegistration = (e) =>{
+    const handelRegistration = async(e) =>{
         e.preventDefault()
             const email = e.target.email.value
             const password = e.target.password.value
             const name = e.target.name.value
-            const img = e.target.img.value
+            const image = e.target.image.files[0]
             console.log(email,password);
             
         if (! /^(?=.*[A-Z])(?=.*[\W_]).{6,}$/.test(password)){
@@ -23,11 +26,17 @@ const Registration = () => {
 
       
         creatEmilAndPassword(email,password)
-        .then((res)=>{
+        .then(async(res)=>{
+                const {display_url} = await userimage(image)
+                console.log(display_url);
+
           updateProfile(res.user,{
             displayName:name,
-            photoURL:img
+            photoURL:display_url
           })
+          const userInfo = {name,display_url,email}
+            await publicAxios.post('/user',userInfo)
+           
           
           navigate("/Create-Store")
            return toast.success("congratulations!  Registration successful ")
@@ -59,12 +68,7 @@ const Registration = () => {
                  </label>
                  <input type="text" placeholder="Name" name='name'  className="input w-full input-bordered " />
                </div>
-               <div className="form-control mt-3">
-                 <label className="label">
-                   <span className="label-text mt-3">PhotoURL</span>
-                 </label>
-                 <input type="text" placeholder="PhotoURL" name='img' className="input w-full input-bordered " />
-               </div>
+               
                <div className="form-control mt-3">
                  <label className="label">
                    <span className="label-text">Email</span>
@@ -77,6 +81,12 @@ const Registration = () => {
                  </label>
                  <input type="password" name='password' placeholder="password" required className="input w-full input-bordered" />
                 
+               </div>
+               <div className="form-control mt-3">
+                 <label className="label">
+                   <span className="label-text mt-3">Image</span>
+                 </label>
+                 <input type="file" placeholder="PhotoURL" name='image' required className=" w-full " />
                </div>
                <div className="form-control mt-6">
                  <button  className="btn bg-red-500 text-white text-xl">Registration</button>
