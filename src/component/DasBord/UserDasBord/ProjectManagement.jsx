@@ -1,15 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { MyContext } from "../../../Route/AuthProvider";
 import AdminSecoure from "../../../Hook/AdminSecoure";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
+import PublicApi from "../../../Hook/PublicApi";
+import Swal from 'sweetalert2'
 
 const ProjectManagement = () => {
   const { user } = useContext(MyContext);
   const axiosSecure = AdminSecoure();
-  const { data, isLoading } = useQuery({
+  const axiosPublic = PublicApi();
+  const { data, isLoading ,refetch} = useQuery({
     queryKey: ["allProduct", user?.email, axiosSecure],
     queryFn: async () => {
       const { data } = await axiosSecure.get(
@@ -18,10 +21,36 @@ const ProjectManagement = () => {
       return data;
     },
   });
-  if (isLoading) {
-    return <h1>loding---------</h1>;
+
+  const handelDelet = (id)=>{
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be deleted this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+            axiosPublic.delete(`/shopProduct/${id}`)
+            .then(res=>{
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your Prodect has been deleted.",
+                    icon: "success"
+                  });
+                
+                refetch()
+            })
+         
+        }
+      });
+       
+    
   }
-  console.log(data);
+ 
+  
   return (
     <div className="w-[80%] mx-auto">
       <div className="flex justify-between text-xl font-bold items-center">
@@ -37,7 +66,7 @@ const ProjectManagement = () => {
         <div className="overflow-x-auto rounded-md mt-9">
           <table className="table">
             {/* head */}
-            <thead className="bg-red-400  ">
+            <thead className="bg-red-200  ">
               <tr>
                 <th>
                   <label>#</label>
@@ -82,7 +111,7 @@ const ProjectManagement = () => {
                      <Link> <button className="btn bg-green-300 text-xl "><FaEdit></FaEdit></button></Link>
                     </th>
                     <th>
-                      <button className="btn text-xl bg-red-500 text-white"><MdDelete></MdDelete></button>
+                      <button onClick={()=>handelDelet(item._id)} className="btn text-xl bg-red-500 text-white"><MdDelete></MdDelete></button>
                     </th>
                   </tr>
                 );
