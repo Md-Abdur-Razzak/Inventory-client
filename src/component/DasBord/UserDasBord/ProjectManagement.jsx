@@ -108,7 +108,7 @@ const ProjectManagement = () => {
                     <td>{item?.quantity}</td>
                     <td>{item?.SaleCount}</td>
                     <th>
-                     <Link> <button className="btn bg-green-300 text-xl "><FaEdit></FaEdit></button></Link>
+                     <Link to={`/dasbord/updateProduct/${item._id}`}> <button className="btn bg-green-300 text-xl "><FaEdit></FaEdit></button></Link>
                     </th>
                     <th>
                       <button onClick={()=>handelDelet(item._id)} className="btn text-xl bg-red-500 text-white"><MdDelete></MdDelete></button>

@@ -8,6 +8,7 @@ import PrivateRoute from "./PrivateRoute";
 import DashbordContainer from "../component/DasBord/DashbordContainer";
 import ProjectManagement from "../component/DasBord/UserDasBord/ProjectManagement";
 import AddProduct from "../component/DasBord/UserDasBord/AddProduct";
+import UpdateProduct from "../component/DasBord/UserDasBord/UpdateProduct";
 
 export const myRoute = createBrowserRouter([{
     path:"/",
@@ -43,6 +44,11 @@ export const myRoute = createBrowserRouter([{
         {
             path:"/dasbord/addProduct",
             element:<AddProduct></AddProduct>
+        },
+        {
+            path:"/dasbord/updateProduct/:id",
+            element:<UpdateProduct></UpdateProduct>,
+            loader:({params})=>fetch(`http://localhost:5000/singleShopProduct/${params.id}`)
         }
     ]
 }
