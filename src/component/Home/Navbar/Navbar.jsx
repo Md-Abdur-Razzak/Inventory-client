@@ -31,47 +31,37 @@ const Navbar = () => {
             to={"/"}
             className={({ isActive, isPending }) =>
             isActive
-            ? " text-white bg-green-700 btn"
+            ? " text-white bg-red-500 btn"
             : isPending
             ? "pending"
             : ""
             }
             >Home</NavLink>
             <NavLink
-            to={"/about"}
+            to={"/Create-Store"}
             className={({ isActive, isPending }) =>
             isActive
-            ? " text-white bg-green-700 btn"
+            ? " text-white bg-red-500 btn"
             : isPending
             ? "pending"
             : ""}
-            >About us</NavLink>
+            >Create-Store</NavLink>
             <NavLink
-            to={"/services"}
+            to={"/Watch-Demo"}
             className={({ isActive, isPending }) =>
             isActive
-            ? " text-white bg-green-700 btn"
+            ? " text-white bg-red-500 btn"
             : isPending
             ? "pending"
             : ""
             }
-            >services</NavLink>
-            
-            <NavLink
-            to={"/contack"}
-            className={({ isActive, isPending }) =>
-            isActive
-            ? " text-white bg-green-700 btn"
-            : isPending
-            ? "pending"
-            : ""
-            }
-            >Contact</NavLink>
+            >Watch Demo</NavLink>
+           
              <NavLink
             to={"/registration"}
             className={({ isActive, isPending }) =>
             isActive
-            ? " text-white bg-green-700 btn"
+            ? " text-white bg-red-500 btn"
             : isPending
             ? "pending"
             : ""
@@ -91,50 +81,42 @@ const Navbar = () => {
             to={"/"}
             className={({ isActive, isPending }) =>
             isActive
-            ? " text-white bg-green-700 btn"
-            : isPending
-            ? "pending"
-            : ""}
-            >Home</NavLink>
-        <NavLink
-            to={"/about"}
-            className={({ isActive, isPending }) =>
-            isActive
-            ? " text-white bg-green-700 btn"
-            : isPending
-            ? "pending"
-            : ""}
-            >About us</NavLink>
-            <NavLink
-            to={"/services"}
-            className={({ isActive, isPending }) =>
-            isActive
-            ? " text-white bg-green-700 btn"
+            ? " text-white bg-red-500 btn"
             : isPending
             ? "pending"
             : ""
             }
-            >services</NavLink>
+            >Home</NavLink>
             <NavLink
-            to={`/contack`}
+            to={"/Create-Store"}
             className={({ isActive, isPending }) =>
             isActive
-            ? " text-white bg-green-700 btn "
+            ? " text-white bg-red-500 btn"
             : isPending
             ? "pending"
             : ""}
-            >Contact</NavLink>
+            >Create-Store</NavLink>
+            <NavLink
+            to={"/Watch-Demo"}
+            className={({ isActive, isPending }) =>
+            isActive
+            ? " text-white bg-red-500 btn"
+            : isPending
+            ? "pending"
+            : ""
+            }
+            >Watch Demo</NavLink>
+           
              <NavLink
             to={"/registration"}
             className={({ isActive, isPending }) =>
             isActive
-            ? " text-white bg-green-700 btn"
+            ? " text-white bg-red-500 btn"
             : isPending
             ? "pending"
             : ""
             }
             >Registration</NavLink>
-          
         </ul>
       </div>
       <div className="navbar-end md:px-12">
@@ -149,7 +131,7 @@ const Navbar = () => {
         
         </label>
           <Link to={'/login'}>
-          <button className='btn bg-green-700 text-white'>
+          <button className='btn bg-red-500 text-white'>
             login
            </button> 
             </Link>        
