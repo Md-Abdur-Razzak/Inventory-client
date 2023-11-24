@@ -24,6 +24,9 @@ const Login = () => {
         if(res.data.dasbord){
             navigator('/dasbord/projectManaget')
         }
+        else if(res.data.creatshop){
+            navigator('/Create-Store')
+        }
     })
     //navigator(singLocation?.state? singLocation.state :"/")
    return toast.success("Log In success")

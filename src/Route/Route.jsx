@@ -7,6 +7,7 @@ import CreateStore from "../component/Home/CreateStore/CreateStore";
 import PrivateRoute from "./PrivateRoute";
 import DashbordContainer from "../component/DasBord/DashbordContainer";
 import ProjectManagement from "../component/DasBord/UserDasBord/ProjectManagement";
+import AddProduct from "../component/DasBord/UserDasBord/AddProduct";
 
 export const myRoute = createBrowserRouter([{
     path:"/",
@@ -38,6 +39,10 @@ export const myRoute = createBrowserRouter([{
         {
             path:"/dasbord/projectManaget",
             element:<ProjectManagement></ProjectManagement>
+        },
+        {
+            path:"/dasbord/addProduct",
+            element:<AddProduct></AddProduct>
         }
     ]
 }
