@@ -107,6 +107,7 @@ const ProjectManagement = () => {
                     </td>
                     <td>{item?.quantity}</td>
                     <td>{item?.SaleCount}</td>
+                  
                     <th>
                      <Link to={`/dasbord/updateProduct/${item._id}`}> <button className="btn bg-green-300 text-xl "><FaEdit></FaEdit></button></Link>
                     </th>
