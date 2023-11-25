@@ -41,19 +41,18 @@ console.log(limit);
     const quantity = from.Quantity.value;
     const shopInfo = from.shopInfo.value;
     const shopArea = from.shopArea.value;
-    const ProductionCost = from.ProductionCost.value;
+    const ProductionCost = parseInt(from.ProductionCost.value);
     const ProfitMargin = parseInt(from.ProfitMargin.value);
     const Discount = from.Discount.value;
-    const  BuyingPrice = parseInt(from. BuyingPrice.value)
-    const logo = from.image.files[0];
+     const logo = from.image.files[0];
     
   
 
    
-    let tax = BuyingPrice * (7.5 / 100);
-    let profit = BuyingPrice * (ProfitMargin / 100);
-    let sellingPrice = BuyingPrice + tax + profit;
-    console.log(typeof sellingPrice);
+    let tax = ProductionCost * (7.5 / 100);
+    let profit = ProductionCost * (ProfitMargin / 100);
+    let sellingPrice =(ProductionCost + tax + profit);
+
 
     const { display_url } = await userimage(logo);
     console.log(limit)
@@ -72,7 +71,7 @@ console.log(limit);
       name,
       email,
       shopId: _id,
-      BuyingPrice,
+   
       sellingPrice,
       SaleCount:0
     };
@@ -145,17 +144,19 @@ console.log(limit);
                   <input
                     type="text"
                     name="Quantity"
+                    placeholder="Quantity"
                     className="input input-bordered w-full"
                     required
                   />
                 </div>
                 <div className="form-control w-full">
                   <label className="label">
-                    <span className="label-text">ProductionCost</span>
+                    <span className="label-text">Product Cost</span>
                   </label>
                   <input
                     type="text"
                     name="ProductionCost"
+                    placeholder="Product Cost"
                     className="input input-bordered w-full"
                     required
                   />
@@ -166,24 +167,13 @@ console.log(limit);
                   </label>
                   <input
                     type="text"
-                    placeholder="100%"
+                    placeholder="Profit Margin"
                     name="ProfitMargin"
                     className="input input-bordered w-full"
                     required
                   />
                 </div>
-                <div className="form-control w-full">
-                  <label className="label">
-                    <span className="label-text">Buying Price</span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Buying Price"
-                    name="BuyingPrice"
-                    className="input input-bordered w-full"
-                    required
-                  />
-                </div>
+                
                 <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text">Discount</span>
@@ -191,6 +181,7 @@ console.log(limit);
                   <input
                     type="text"
                     name="Discount"
+                    placeholder="Discount"
                     className="input input-bordered w-full"
                     required
                   />

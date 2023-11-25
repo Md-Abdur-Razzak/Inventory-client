@@ -13,6 +13,7 @@ import SalesCollection from "../component/DasBord/UserDasBord/SalesCollection";
 import ChackOutPage from "../component/DasBord/UserDasBord/ChackOutPage";
 import PaymentManager from "../component/DasBord/UserDasBord/PaymentManager";
 import PaymentCard from "../component/DasBord/UserDasBord/PaymentCard";
+import SalesSummry from "../component/DasBord/UserDasBord/SalesSummry";
 
 export const myRoute = createBrowserRouter([{
     path:"/",
@@ -67,6 +68,11 @@ export const myRoute = createBrowserRouter([{
         {
             path:"/dasbord/chackOut",
             element:<ChackOutPage></ChackOutPage>
+            
+        },
+        {
+            path:"/dasbord/salesSummry",
+            element:<SalesSummry></SalesSummry>
             
         },
         {

@@ -4,18 +4,15 @@ import AdminSecoure from "../../../Hook/AdminSecoure";
 import moment from "moment";
 import { jsPDF } from "jspdf";
 import PublicApi from "../../../Hook/PublicApi";
+import SalesProduct from "../../../Hook/SalesProduct";
 
 const ChackOutPage = () => {
   // salesProduct
-  const { user } = useContext(MyContext);
-  const [chackOut, setChakOut] = useState([]);
-  const axiosSecure = AdminSecoure();
+
+
+  const {salesData}=SalesProduct()
   const axiosPublic = PublicApi()
-  useEffect(() => {
-    axiosSecure.get(`/salesProduct?email=${user?.email}`).then((res) => {
-      setChakOut(res.data);
-    });
-  }, [user?.email, axiosSecure]);
+
 
   const handelPaid = (id, image,shopname,sellingPrice,Discount) => {
     const date = moment().format("L");
@@ -38,7 +35,7 @@ const ChackOutPage = () => {
   };
   return (
     <div>
-      data: {chackOut.length}
+      data: {salesData?.length}
       <div>
         <div className="overflow-x-auto rounded-md mt-9">
           <table className="table">
@@ -60,7 +57,7 @@ const ChackOutPage = () => {
             </thead>
             <tbody>
               {/* row 1 */}
-              {chackOut?.map((item, index) => {
+              {salesData?.map((item, index) => {
                 return (
                   <tr key={item._id}>
                     <th>

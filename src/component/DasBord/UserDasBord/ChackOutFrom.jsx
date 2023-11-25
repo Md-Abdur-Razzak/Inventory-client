@@ -1,6 +1,9 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useContext} from "react";
+import AdminSecoure from "../../../Hook/AdminSecoure";
+import { toast } from "react-toastify";
+import { MyContext } from "../../../Route/AuthProvider";
 
 
 
@@ -8,10 +11,12 @@ import { useContext} from "react";
 
 
 
-const ChackOutFrom = () => {
-
-     
+const ChackOutFrom = ({data}) => {
+  const {user}=useContext(MyContext)
+     const {taka,limit}=data || {}
+     const axiosSecure = AdminSecoure()
      const [errorText,setErrorPage]=useState('')
+     const [secretKey,setSecretKey]=useState('')
      const strip = useStripe();
      const elements = useElements();
 
@@ -19,12 +24,11 @@ const ChackOutFrom = () => {
 
 
 
-//  useEffect(()=>{
+ useEffect(()=>{
+   axiosSecure.post('/payment',{taka})
+    .then(res=> setSecretKey(res.data.clientSecret) )
   
-//     price>=1 &&   axiosApi.post('/payment',{price})
-//     .then(res=> setSecretKey(res.data.clientSecret) )
-  
-//  },[axiosApi,price])
+ },[axiosSecure,taka])
  
   const handelChackOut = async (e) => {
     e.preventDefault();
@@ -46,44 +50,40 @@ const ChackOutFrom = () => {
         // console.log("succesfull payment : ",paymentMethod);
         setErrorPage('')
     }
-    // const {paymentIntent,err}=await strip.confirmCardPayment(secretKey,{
-    //     payment_method:{
-    //         card:card,
-    //         billing_details:{
-    //             name:user?.displayName || "unNone name",
-    //             email:user?.email || "unNone email"
-    //         }
-    //     }
-    // })
-    // if (err) {
-    //    setErrorPage(err.message);
-    // }else{
-    //     if (paymentIntent.status==='succeeded' ) {
-    //         toast(`payment succesfull Your Transzation ID :${paymentIntent.id}`)
-    //         setErrorPage('')
-    //         const paymentDetails = {
-    //           email:user?.email,
-    //           price:price,
-    //           date:new Date(),
-    //           trans_id :paymentIntent.id,
-    //           manuId : data.map(item=>item.manuId),
-    //           cartId : data.map(item=>item._id),
-    //           chack:"pending"
-
-    //         }
-    //        const res=await axiosApi.post(`/userPaymentInfo`,paymentDetails)
-    //        console.log(res);
-    //     }
+    const {paymentIntent,err}=await strip.confirmCardPayment(secretKey,{
+        payment_method:{
+            card:card,
+            billing_details:{
+                name:user?.displayName || "unNone name",
+                email:user?.email || "unNone email"
+            }
+        }
+    })
+    if (err) {
+       setErrorPage(err.message);
+    }else{
+        if (paymentIntent.status==='succeeded' ) {
+            toast.success(`payment succesfull Your Transzation ID :${paymentIntent.id}`)
+            setErrorPage('')
+      
+          const{data}= await axiosSecure.post(`/limitUpdate?email=${user?.email}`,{limit})
+          console.log(data);
+        }
         
       
-    // }
+    }
 
 
   };
 
 
   return (
-    <form className="mt-12" onSubmit={handelChackOut}>
+  <div>
+    <div className="text-3xl font-extrabold gap-4 flex justify-evenly items-center">
+        <h1>USD : ${taka}</h1>
+        <h1>limit Number : {limit}</h1>
+    </div>
+        <form className="mt-12" onSubmit={handelChackOut}>
       <CardElement
         options={{
           style: {
@@ -102,11 +102,12 @@ const ChackOutFrom = () => {
           },
         }}
       />
-      <button disabled={!strip } className="btn btn-primary mt-4" type="submit">
+      <button disabled={!strip || !secretKey } className="btn btn-primary mt-4" type="submit">
         Pay
       </button>
     <h1>{errorText}</h1>
     </form>
+  </div>
   );
 };
 

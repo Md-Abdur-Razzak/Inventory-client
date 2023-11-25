@@ -42,7 +42,7 @@ const DashbordContainer = () => {
 
         </NavLink>
         <NavLink
-          to={"/dasbord/Summary"}
+          to={"/dasbord/salesSummry"}
           className={({ isActive, isPending }) =>
             isActive ? " text-white bg-red-500 btn" : isPending ? "pending" : ""
           }

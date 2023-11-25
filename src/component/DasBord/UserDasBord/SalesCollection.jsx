@@ -9,7 +9,7 @@ const SalesCollection = () => {
   const axiosSecure = AdminSecoure();
   const axoisPublic = PublicApi()
   const { user } = useContext(MyContext);
-  const [salesData, setSalesData] = useState([]);
+  const [salesDataStart, setSalesData] = useState([]);
   useEffect(() => {
     axiosSecure.get(`/shopProduct?email=${user?.email}`).then((res) => {
       setSalesData(res.data);
@@ -25,12 +25,24 @@ const SalesCollection = () => {
     })
     
   };
+  console.log(salesDataStart);
+  const handelSearch = (e)=>{
+    e.preventDefault()
+    const id = e.target.serch.value
+    console.log(id);
+    const filter = salesDataStart?.filter(serch=>serch._id == id)
+    console.log(filter);
+    setSalesData(filter)
+ 
+
+  }
   return (
     <div>
       <div>
         <div className="join flex justify-center ">
-          <form>
+          <form onSubmit={handelSearch}>
             <input
+            name="serch"
               className="input px-44 input-bordered join-item"
               placeholder="Id : 6560ef61732cfc2132c97c7d"
             />
@@ -60,7 +72,7 @@ const SalesCollection = () => {
             </thead>
             <tbody>
               {/* row 1 */}
-              {salesData?.map((item, index) => {
+              {salesDataStart?.map((item, index) => {
                 return (
                   <tr key={item._id}>
                     <th>
