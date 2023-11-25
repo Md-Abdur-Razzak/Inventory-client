@@ -1,9 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import AdminSecoure from "../../../Hook/AdminSecoure";
 import { MyContext } from "../../../Route/AuthProvider";
+import PublicApi from "../../../Hook/PublicApi";
+import { toast } from "react-toastify";
 
 const SalesCollection = () => {
   const axiosSecure = AdminSecoure();
+  const axoisPublic = PublicApi()
   const { user } = useContext(MyContext);
   const [salesData, setSalesData] = useState([]);
   useEffect(() => {
@@ -11,11 +14,21 @@ const SalesCollection = () => {
       setSalesData(res.data);
     });
   }, [user?.email, axiosSecure]);
+  const handeChack = (sId,shopName,display_url,Discount,quantity,sellingPrice) => {
+    const salesData = {sId,shopName,display_url,Discount,quantity,sellingPrice}
+    axoisPublic.post('/salesProduct',salesData)
+    .then(res=>{
+       if(res.data.insertedId){
+        toast.success("Add for check-out successfuly")
+       }
+    })
+    
+  };
   return (
     <div>
       <div>
         <div className="join flex justify-center ">
-          <form >
+          <form>
             <input
               className="input px-44 input-bordered join-item"
               placeholder="Id : 6560ef61732cfc2132c97c7d"
@@ -71,7 +84,19 @@ const SalesCollection = () => {
                     <td>{item?.sellingPrice}</td>
                     <td>{item?.Discount}</td>
                     <th>
-                      <button className="btn bg-green-300 text-xl ">
+                      <button
+                        onClick={() =>
+                          handeChack(
+                            item?._id,
+                            item?.shopName,
+                            item?.display_url,
+                            item?.Discount,
+                            item.quantity,
+                            item?.sellingPrice,
+                          )
+                        }
+                        className="btn bg-green-300 text-xl "
+                      >
                         Add For Check-out
                       </button>
                     </th>

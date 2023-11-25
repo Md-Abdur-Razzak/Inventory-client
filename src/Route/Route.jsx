@@ -10,6 +10,7 @@ import ProjectManagement from "../component/DasBord/UserDasBord/ProjectManagemen
 import AddProduct from "../component/DasBord/UserDasBord/AddProduct";
 import UpdateProduct from "../component/DasBord/UserDasBord/UpdateProduct";
 import SalesCollection from "../component/DasBord/UserDasBord/SalesCollection";
+import ChackOutPage from "../component/DasBord/UserDasBord/ChackOutPage";
 
 export const myRoute = createBrowserRouter([{
     path:"/",
@@ -54,6 +55,11 @@ export const myRoute = createBrowserRouter([{
         {
             path:"/dasbord/sales",
             element:<SalesCollection></SalesCollection>
+            
+        },
+        {
+            path:"/dasbord/chackOut",
+            element:<ChackOutPage></ChackOutPage>
             
         }
     ]
