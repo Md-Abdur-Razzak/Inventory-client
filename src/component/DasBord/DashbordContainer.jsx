@@ -24,7 +24,7 @@ const DashbordContainer = () => {
 
         </NavLink>
         <NavLink
-          to={"/dasbord/chack-out"}
+          to={"/dasbord/chackOut"}
           className={({ isActive, isPending }) =>
             isActive ? " text-white bg-red-500 btn" : isPending ? "pending" : ""
           }
@@ -52,7 +52,7 @@ const DashbordContainer = () => {
         </ul>
         <hr className="border border-red-300 mt-9"/>
         <div className="flex flex-col mt-[30px] gap-4 text-xl font-bold">
-            <Link className="btn bg-red-500 text-white">Home</Link>
+            <Link to={'/'} className="btn bg-red-500 text-white">Home</Link>
             <Link className="btn bg-red-500 text-white">logOut </Link>
         </div>
       </div>

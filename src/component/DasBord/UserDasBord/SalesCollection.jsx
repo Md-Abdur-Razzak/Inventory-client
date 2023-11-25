@@ -3,6 +3,7 @@ import AdminSecoure from "../../../Hook/AdminSecoure";
 import { MyContext } from "../../../Route/AuthProvider";
 import PublicApi from "../../../Hook/PublicApi";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const SalesCollection = () => {
   const axiosSecure = AdminSecoure();
@@ -14,8 +15,8 @@ const SalesCollection = () => {
       setSalesData(res.data);
     });
   }, [user?.email, axiosSecure]);
-  const handeChack = (sId,shopName,display_url,Discount,quantity,sellingPrice) => {
-    const salesData = {sId,shopName,display_url,Discount,quantity,sellingPrice}
+  const handeChack = (sId,shopName,display_url,Discount,quantity,sellingPrice,email) => {
+    const salesData = {sId,shopName,display_url,Discount,quantity,sellingPrice,email}
     axoisPublic.post('/salesProduct',salesData)
     .then(res=>{
        if(res.data.insertedId){
@@ -93,6 +94,7 @@ const SalesCollection = () => {
                             item?.Discount,
                             item.quantity,
                             item?.sellingPrice,
+                            user?.email
                           )
                         }
                         className="btn bg-green-300 text-xl "
@@ -105,7 +107,12 @@ const SalesCollection = () => {
               })}
             </tbody>
           </table>
+         
         </div>
+        <Link className="flex justify-center" to={'/dasbord/chackOut'}>
+              <button className="btn bg-red-500 text-xl text-white mt-[100px]">Proceed Checkout</button>
+          </Link>
+        
       </div>
     </div>
   );

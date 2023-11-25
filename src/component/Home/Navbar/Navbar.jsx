@@ -6,7 +6,7 @@ import Users from "../../../Hook/Users";
 const Navbar = () => {
   const { user ,logOutUser } = useContext(MyContext);
   const {data}=Users()
-  console.log(data);
+  console.log(data?.manager);
   return (
     <div className="navbar bg-base-100 dark:text-white sticky inset-0 z-10  rounded-none border  bg-opacity-30  text-black shadow-md backdrop-blur-2xl backdrop-saturate-200 lg:px-2 lg:py-2">
       <div className="navbar-start ">
@@ -146,7 +146,7 @@ const Navbar = () => {
             Registration
           </NavLink>
           {
-        user && data?.manager?
+         data?.manager?
              <NavLink
             to={"/dasbord/projectManaget"}
             className={({ isActive, isPending }) =>
@@ -157,10 +157,10 @@ const Navbar = () => {
                 : ""
             }
           >
-            Dashbord
-          </NavLink> :''
+           {user?"dasbord":""}
+          </NavLink> :'' 
           
-         } 
+          } 
         </ul>
       </div>
       <div className="navbar-end md:px-12 ">

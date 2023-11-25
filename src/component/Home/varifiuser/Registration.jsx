@@ -35,7 +35,8 @@ const Registration = () => {
             photoURL:display_url
           })
           const userInfo = {name,display_url,email}
-            await publicAxios.post('/user',userInfo)
+
+           await publicAxios.post('/user',userInfo)
            
           
           navigate("/Create-Store")
