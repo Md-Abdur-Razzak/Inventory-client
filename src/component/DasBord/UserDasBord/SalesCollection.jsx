@@ -15,8 +15,8 @@ const SalesCollection = () => {
       setSalesData(res.data);
     });
   }, [user?.email, axiosSecure]);
-  const handeChack = (sId,shopName,display_url,Discount,quantity,sellingPrice,email) => {
-    const salesData = {sId,shopName,display_url,Discount,quantity,sellingPrice,email}
+  const handeChack = (sId,shopName,display_url,Discount,quantity,sellingPrice,email,ProductionCost) => {
+    const salesData = {sId,shopName,display_url,Discount,quantity,sellingPrice,email,ProductionCost}
     axoisPublic.post('/salesProduct',salesData)
     .then(res=>{
        if(res.data.insertedId){
@@ -96,6 +96,7 @@ const SalesCollection = () => {
                     <td>{item?.quantity}</td>
                     <td>{item?.sellingPrice}</td>
                     <td>{item?.Discount}</td>
+             
                     <th>
                       <button
                         onClick={() =>
@@ -106,7 +107,8 @@ const SalesCollection = () => {
                             item?.Discount,
                             item.quantity,
                             item?.sellingPrice,
-                            user?.email
+                            user?.email,
+                            item?.ProductionCost
                           )
                         }
                         className="btn bg-green-300 text-xl "

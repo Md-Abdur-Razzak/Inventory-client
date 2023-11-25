@@ -4,21 +4,26 @@ import AdminSecoure from "../../../Hook/AdminSecoure";
 import moment from "moment";
 import { jsPDF } from "jspdf";
 import PublicApi from "../../../Hook/PublicApi";
-import SalesProduct from "../../../Hook/SalesProduct";
+import { toast } from "react-toastify";
 
 const ChackOutPage = () => {
   // salesProduct
+  const { user } = useContext(MyContext);
+  const [chackOut, setChakOut] = useState([]);
+  const axiosSecure = AdminSecoure();
+  const axiosPublic = PublicApi();
+  useEffect(() => {
+    axiosSecure.get(`/salesProduct?email=${user?.email}`).then((res) => {
+      setChakOut(res.data);
+    });
+  }, [user?.email, axiosSecure]);
 
-
-  const {salesData}=SalesProduct()
-  const axiosPublic = PublicApi()
-
-
-  const handelPaid = (id, image,shopname,sellingPrice,Discount) => {
+  const handelPaid = async(id, image, shopname, sellingPrice, Discount,ProductionCost) => {
     const date = moment().format("L");
     const time = moment().format("h:mm:ss a");
-    const dateTimeId = { date, time ,id};
-   
+    const email = user?.email
+    const dateTimeId = { date, time, id };
+    const paindInfo ={id,image,shopname,sellingPrice,Discount,ProductionCost,email}
     // const doc = new jsPDF();
     // doc.text(`${shopname}`,100,20,null,null, "center");
     // doc.addImage(`${image}`, "JPEG", 15, 40, 180, 100);
@@ -28,14 +33,15 @@ const ChackOutPage = () => {
     // doc.save(`${shopname}.pdf`)
     //  const filterData = chackOut?.filter((itemData) => itemData._id !== id);
     // setChakOut(filterData);
-    axiosPublic.post('/getPaidUpdateData',dateTimeId)
-    .then(res=>{
-        console.log(res.data);
-    })
+    await axiosPublic.post("/getPaidUpdateData", dateTimeId)
+   const {data:info} = await axiosPublic.post("/paindInfo", paindInfo)
+   if(info.insertedId){
+    toast.success("Get Paid success")
+   }
   };
   return (
     <div>
-      data: {salesData?.length}
+      data: {chackOut.length}
       <div>
         <div className="overflow-x-auto rounded-md mt-9">
           <table className="table">
@@ -57,7 +63,7 @@ const ChackOutPage = () => {
             </thead>
             <tbody>
               {/* row 1 */}
-              {salesData?.map((item, index) => {
+              {chackOut?.map((item, index) => {
                 return (
                   <tr key={item._id}>
                     <th>
@@ -83,8 +89,16 @@ const ChackOutPage = () => {
                     <td>{item?.Discount}</td>
                     <td>
                       <button
-                        onClick={() => handelPaid(item?.sId, item?.display_url,item?.shopName,item?.sellingPrice,item?.Discount)}
-                   
+                        onClick={() =>
+                          handelPaid(
+                            item?.sId,
+                            item?.display_url,
+                            item?.shopName,
+                            item?.sellingPrice,
+                            item?.Discount,
+                            item?.ProductionCost
+                          )
+                        }
                         className="text-xl btn bg-red-500"
                       >
                         Get Paid
