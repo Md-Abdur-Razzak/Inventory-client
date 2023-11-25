@@ -9,6 +9,7 @@ import DashbordContainer from "../component/DasBord/DashbordContainer";
 import ProjectManagement from "../component/DasBord/UserDasBord/ProjectManagement";
 import AddProduct from "../component/DasBord/UserDasBord/AddProduct";
 import UpdateProduct from "../component/DasBord/UserDasBord/UpdateProduct";
+import SalesCollection from "../component/DasBord/UserDasBord/SalesCollection";
 
 export const myRoute = createBrowserRouter([{
     path:"/",
@@ -49,6 +50,11 @@ export const myRoute = createBrowserRouter([{
             path:"/dasbord/updateProduct/:id",
             element:<UpdateProduct></UpdateProduct>,
             loader:({params})=>fetch(`http://localhost:5000/singleShopProduct/${params.id}`)
+        },
+        {
+            path:"/dasbord/sales",
+            element:<SalesCollection></SalesCollection>
+            
         }
     ]
 }
