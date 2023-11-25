@@ -33,7 +33,7 @@ const DashbordContainer = () => {
 
         </NavLink>
         <NavLink
-          to={"/dasbord/payment"}
+          to={"/dasbord/paymentManager"}
           className={({ isActive, isPending }) =>
             isActive ? " text-white bg-red-500 btn" : isPending ? "pending" : ""
           }

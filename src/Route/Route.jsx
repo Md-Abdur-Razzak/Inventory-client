@@ -11,6 +11,8 @@ import AddProduct from "../component/DasBord/UserDasBord/AddProduct";
 import UpdateProduct from "../component/DasBord/UserDasBord/UpdateProduct";
 import SalesCollection from "../component/DasBord/UserDasBord/SalesCollection";
 import ChackOutPage from "../component/DasBord/UserDasBord/ChackOutPage";
+import PaymentManager from "../component/DasBord/UserDasBord/PaymentManager";
+import PaymentCard from "../component/DasBord/UserDasBord/PaymentCard";
 
 export const myRoute = createBrowserRouter([{
     path:"/",
@@ -53,6 +55,11 @@ export const myRoute = createBrowserRouter([{
             loader:({params})=>fetch(`http://localhost:5000/singleShopProduct/${params.id}`)
         },
         {
+            path:"/dasbord/paymentCord/:id",
+            element:<PaymentCard></PaymentCard>,
+            loader:({params})=>fetch(`http://localhost:5000/limit/${params.id}`)
+        },
+        {
             path:"/dasbord/sales",
             element:<SalesCollection></SalesCollection>
             
@@ -60,6 +67,12 @@ export const myRoute = createBrowserRouter([{
         {
             path:"/dasbord/chackOut",
             element:<ChackOutPage></ChackOutPage>
+            
+        },
+        {
+            path:"/dasbord/paymentManager",
+            element:<PaymentManager></PaymentManager>,
+            loader:()=>fetch('http://localhost:5000/limit')
             
         }
     ]
