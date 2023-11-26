@@ -15,6 +15,7 @@ import PaymentManager from "../component/DasBord/UserDasBord/PaymentManager";
 import PaymentCard from "../component/DasBord/UserDasBord/PaymentCard";
 import SalesSummry from "../component/DasBord/UserDasBord/SalesSummry";
 import MangeShopAdmin from "../component/DasBord/AdminDashbord/MangeShopAdmin";
+import SaleSummryAdmin from "../component/DasBord/AdminDashbord/SaleSummryAdmin";
 
 export const myRoute = createBrowserRouter([{
     path:"/",
@@ -86,6 +87,12 @@ export const myRoute = createBrowserRouter([{
         {
             path:"/dasbord/manageshop",
             element:<MangeShopAdmin></MangeShopAdmin>
+            
+            
+        },
+        {
+            path:"/dasbord/Sale-Summary",
+            element:<SaleSummryAdmin></SaleSummryAdmin>
             
             
         }

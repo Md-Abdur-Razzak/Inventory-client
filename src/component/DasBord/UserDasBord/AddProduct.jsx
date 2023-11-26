@@ -4,11 +4,12 @@ import { MyContext } from "../../../Route/AuthProvider";
 import { userimage } from "../../../utis/imageUplode";
 import { toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
   const adminSecure = AdminSecoure();
   const { user } = useContext(MyContext);
-  console.log(user?.email);
+ const navigate = useNavigate()
 //   const [shopUser, setShopUser] = useState({});
 
 //   useEffect(() => {
@@ -36,6 +37,7 @@ const AddProduct = () => {
 
     e.preventDefault();
     if (limit<=0) {
+        navigate('/dasbord/paymentManager')
         return toast.warn("your product Limit end ")
     }
     const from = e.target;
@@ -83,7 +85,7 @@ const AddProduct = () => {
         const{data}=await adminSecure.post('/shopProduct',prodectsAllDetails)
        if (data.insertedId) {
         await refetch()
-       toast.success("Product Add Successfuly")
+        toast.success("Product Add Successfuly")
        }
 
   };

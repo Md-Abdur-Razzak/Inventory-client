@@ -52,7 +52,7 @@ const CreateStore = () => {
                 <div className="md:flex justify-between md:gap-4">
                   <div className="form-control w-full">
                     <label className="label">
-                      <span className="label-text">Shop Name</span>
+                      <span className="label-text">Product Name</span>
                     </label>
                     <input
                       type="text"
