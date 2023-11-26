@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { MyContext } from "../../../Route/AuthProvider";
 import { toast } from "react-toastify";
 import PublicApi from "../../../Hook/PublicApi";
+import Users from "../../../Hook/Users";
+
 
 
 const Login = () => {
@@ -10,7 +12,8 @@ const Login = () => {
     const publicAxios = PublicApi()
     const {singWithEmailAndPassword}=useContext(MyContext)
     const navigator = useNavigate()
-   // const singLocation = useLocation()
+    const {refetch}=Users()
+
    const handelLogin = (e) =>{
     e.preventDefault()
     const email = e.target.email.value
@@ -21,10 +24,16 @@ const Login = () => {
  
     publicAxios.get(`/user?email=${res.user.email}`)
     .then(res=>{
-        if(res.data.dasbord){
-            navigator('/dasbord/projectManaget')
+      console.log(res.data);
+        if(res?.data?.roll=="manager"){
+           refetch()
+          navigator('/dasbord/projectManaget')
         }
-        else if(res.data.creatshop){
+        else if (res?.data?.roll=="admin") {
+         refetch()
+          navigator('/dasbord/manageshop')
+        }
+        else if(res?.data?.creatshop){
             navigator('/Create-Store')
         }
     })

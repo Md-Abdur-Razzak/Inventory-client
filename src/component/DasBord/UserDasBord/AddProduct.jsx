@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 const AddProduct = () => {
   const adminSecure = AdminSecoure();
   const { user } = useContext(MyContext);
+  console.log(user?.email);
 //   const [shopUser, setShopUser] = useState({});
 
 //   useEffect(() => {
@@ -27,9 +28,10 @@ const AddProduct = () => {
     return <h1>loding-----------</h1>
   }
 
- const { _id, name, email ,limit} = data.users || {};
+ const { _id, name, email ,limit} = data || {};
+
  
-console.log(limit);
+
   const handelAddData = async (e) => {
 
     e.preventDefault();
@@ -51,11 +53,12 @@ console.log(limit);
    
     let tax = ProductionCost * (7.5 / 100);
     let profit = ProductionCost * (ProfitMargin / 100);
-    let sellingPrice =(ProductionCost + tax + profit);
+    let sale =(ProductionCost + tax + profit);
+    let sellingPrice =sale.toFixed(3);
 
 
     const { display_url } = await userimage(logo);
-    console.log(limit)
+
    
 
     const prodectsAllDetails = {

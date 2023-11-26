@@ -106,7 +106,7 @@ const SalesCollection = () => {
                             item?.display_url,
                             item?.Discount,
                             item.quantity,
-                            item?.sellingPrice,
+                            parseFloat(item?.sellingPrice),
                             user?.email,
                             item?.ProductionCost
                           )

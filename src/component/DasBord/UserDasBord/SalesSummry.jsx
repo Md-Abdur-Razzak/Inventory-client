@@ -13,11 +13,11 @@ const SalesSummry = () => {
   }, [user?.email, axiosSecure]);
 
   const saleingPrice = salesData?.reduce(
-    (sum, totalPrice) => sum + totalPrice.sellingPrice,
+    (sum, totalPrice) => sum + parseFloat(totalPrice.sellingPrice),
     0
   );
   const productCost = salesData?.reduce(
-    (sum2, totalPrice2) => sum2 + parseInt(totalPrice2.ProductionCost),
+    (sum2, totalPrice2) => sum2 + parseFloat(totalPrice2.ProductionCost),
     0
   );
   const productProfit = saleingPrice - productCost;
@@ -28,7 +28,9 @@ const SalesSummry = () => {
       {salesData.length == 0 ? (
         "Product is Empty"
       ) : (
-        <div className="stats shadow">
+       <div>
+          <div>
+          <div className="stats shadow">
           <div className="stat">
             <div className="stat-figure text-secondary">
               <svg
@@ -88,10 +90,67 @@ const SalesSummry = () => {
               </svg>
             </div>
 
-            <div className="stat-value">{productProfit}</div>
+            <div className="stat-value">{productProfit.toFixed(3)}</div>
             <div className="stat-desc text-xl">Total Profit</div>
           </div>
         </div>
+          </div>
+            <div>
+            <div className="overflow-x-auto rounded-md mt-9">
+          <table className="table">
+            {/* head */}
+            <thead className="bg-red-200  ">
+              <tr>
+                <th>
+                  <label>#</label>
+                </th>
+
+                <th>Image</th>
+                <th>Product Name</th>
+               <th>Profit</th>
+               <th>Date</th>
+            
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* row 1 */}
+              {salesData?.map((item, index) => {
+                return (
+                  <tr key={item._id}>
+                    <th>
+                      <label>{index + 1}</label>
+                    </th>
+                    <td>
+                      <div className="flex items-center gap-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle w-12 h-12">
+                            <img
+                              src={item?.image}
+                              alt="Avatar Tailwind CSS Component"
+                            />
+                          </div>
+                        </div>
+                        <div></div>
+                      </div>
+                    </td>
+                    <td>{item?.shopname}</td>
+               
+                  
+                    <td>{(item?.sellingPrice- item?.ProductionCost).toFixed(3)}</td>
+                    <td>{item?.date}</td>
+               
+                 
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+            </div>
+
+       </div>
+
       )}
     </div>
   );

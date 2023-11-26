@@ -23,7 +23,7 @@ const ChackOutPage = () => {
     const time = moment().format("h:mm:ss a");
     const email = user?.email
     const dateTimeId = { date, time, id };
-    const paindInfo ={id,image,shopname,sellingPrice,Discount,ProductionCost,email}
+    const paindInfo ={id,image,shopname,sellingPrice,Discount,ProductionCost,email,date}
     // const doc = new jsPDF();
     // doc.text(`${shopname}`,100,20,null,null, "center");
     // doc.addImage(`${image}`, "JPEG", 15, 40, 180, 100);
