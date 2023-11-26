@@ -7,7 +7,7 @@ const SaleSummryAdmin = () => {
     const [amount,setAmount]=useState()
     const [allProduct,setAllProduct]=useState([])
     const [sales,setSale]=useState([])
-    const {data:allusers} = AllUser()
+    const [user,SetUser]=useState([])
  
     useEffect(()=>{
             axiosSeure.get('/amount')
@@ -22,6 +22,11 @@ const SaleSummryAdmin = () => {
             axiosSeure.get('/allpaidInfo')
             .then(res=>{
                 setSale(res.data.length);
+            })
+            axiosSeure.get('/alluser')
+            .then(res=>{
+                const filter =res?.data?.filter(user=> user.roll !=="admin")
+               SetUser(filter)
             })
     },[axiosSeure])
 
@@ -113,7 +118,7 @@ const SaleSummryAdmin = () => {
             </thead>
             <tbody>
               {/* row 1 */}
-              {allusers?.map((item, index) => {
+              {user?.map((item, index) => {
                 return (
                   <tr key={item._id}>
                     <th>
@@ -123,12 +128,14 @@ const SaleSummryAdmin = () => {
                     <td>{item?.name}</td>
                     <td>{item.email}</td>
                     <td>{item.shopName || "Name Empty"}</td>
-                    <td>{item?.roll =="admin" ? "manager" : item?.roll =="manager"? "Manager": "Empty" }</td>
+                    <td>{ item?.roll || "Empty" }</td>
              
                     <th>
-                      <button className="btn bg-red-400 text-white">
-                       send Notice
-                      </button>
+                      {
+                        item?.roll? "": <button className="btn bg-red-400 text-white">
+                       Send Promotional Email
+                       </button>
+                      }
                     </th>
                   </tr>
                 );

@@ -1,10 +1,11 @@
+import Bannder from "./HomePages/Bannder";
 import Navbar from "./Navbar/Navbar";
 
 
 const Home = () => {
     return (
         <div>
-           Iam a Home Bar
+          <Bannder></Bannder>
         </div>
     );
 };

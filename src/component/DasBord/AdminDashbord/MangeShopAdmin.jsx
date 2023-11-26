@@ -55,7 +55,7 @@ const MangeShopAdmin = () => {
                         <div></div>
                       </div>
                     </td>
-                    <td>{item?.name}</td>
+                    <td>{item?.shopName}</td>
                     <td>{item.limit}</td>
                     <td>{item?.shopInfo}</td>
              
