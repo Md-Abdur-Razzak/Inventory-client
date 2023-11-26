@@ -11,6 +11,7 @@ import { MyContext } from "../../../Route/AuthProvider";
 
 
 
+
 const ChackOutFrom = ({data}) => {
   const {user}=useContext(MyContext)
      const {taka,limit}=data || {}
@@ -63,6 +64,10 @@ const ChackOutFrom = ({data}) => {
        setErrorPage(err.message);
     }else{
         if (paymentIntent.status==='succeeded' ) {
+           const taka = (paymentIntent.amount );
+           const amount = {taka}
+           await axiosSecure.post('/amount',amount)
+          
             toast.success(`payment succesfull Your Transzation ID :${paymentIntent.id}`)
             setErrorPage('')
       

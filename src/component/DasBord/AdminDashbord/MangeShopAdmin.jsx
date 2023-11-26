@@ -1,9 +1,20 @@
+import { useEffect, useState } from "react";
 import AllUser from "../../../Hook/AllUser";
+import AdminSecoure from "../../../Hook/AdminSecoure";
 
 
 const MangeShopAdmin = () => {
-    const{data}=AllUser()
-    console.log(data);
+    const axiosSecure = AdminSecoure()
+    const [alluser,setUser]=useState([])
+   
+    useEffect(()=>{
+        axiosSecure.get('/alluser')
+        .then(res=>{
+            const filter =res?.data?.filter(user=>user.roll=="manager")
+           setUser(filter)
+        })
+    },[axiosSecure])
+
     return (
         <div>
            <div>
@@ -25,7 +36,7 @@ const MangeShopAdmin = () => {
             </thead>
             <tbody>
               {/* row 1 */}
-              {data?.map((item, index) => {
+              {alluser?.map((item, index) => {
                 return (
                   <tr key={item._id}>
                     <th>
@@ -50,7 +61,7 @@ const MangeShopAdmin = () => {
              
                     <th>
                       <button className="btn bg-red-400 text-white">
-                       send message
+                       send Notice
                       </button>
                     </th>
                   </tr>
