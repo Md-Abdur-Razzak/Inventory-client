@@ -16,6 +16,7 @@ import PaymentCard from "../component/DasBord/UserDasBord/PaymentCard";
 import SalesSummry from "../component/DasBord/UserDasBord/SalesSummry";
 import MangeShopAdmin from "../component/DasBord/AdminDashbord/MangeShopAdmin";
 import SaleSummryAdmin from "../component/DasBord/AdminDashbord/SaleSummryAdmin";
+import WatchDemo from "../component/Home/HomePages/WatchDemo";
 
 export const myRoute = createBrowserRouter([{
     path:"/",
@@ -36,6 +37,10 @@ export const myRoute = createBrowserRouter([{
         {
             path:'/Create-Store',
             element:<PrivateRoute><CreateStore></CreateStore></PrivateRoute>
+        },
+        {
+            path:'/Watch-Demo',
+            element:<WatchDemo></WatchDemo>
         }
     ]
     

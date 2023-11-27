@@ -4,15 +4,18 @@ import { MyContext } from "../../../Route/AuthProvider";
 import PublicApi from "../../../Hook/PublicApi";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import Loding from "../../Home/loder/Loding";
 
 const SalesCollection = () => {
   const axiosSecure = AdminSecoure();
   const axoisPublic = PublicApi()
   const { user } = useContext(MyContext);
   const [salesDataStart, setSalesData] = useState([]);
+  const [loding,setLoding]=useState(true)
   useEffect(() => {
     axiosSecure.get(`/shopProduct?email=${user?.email}`).then((res) => {
       setSalesData(res.data);
+      setLoding(false)
     });
   }, [user?.email, axiosSecure]);
   const handeChack = (sId,shopName,display_url,Discount,quantity,sellingPrice,email,ProductionCost) => {
@@ -25,6 +28,9 @@ const SalesCollection = () => {
     })
     
   };
+  if (loding) {
+    return <Loding></Loding>
+  }
   console.log(salesDataStart);
   const handelSearch = (e)=>{
     e.preventDefault()
@@ -92,7 +98,7 @@ const SalesCollection = () => {
                       </div>
                     </td>
                     <td>{item?.shopName}</td>
-                    <td>{item._id}</td>
+                    <td>{item?._id}</td>
                     <td>{item?.quantity}</td>
                     <td>{item?.sellingPrice}</td>
                     <td>{item?.Discount}</td>
@@ -105,7 +111,7 @@ const SalesCollection = () => {
                             item?.shopName,
                             item?.display_url,
                             item?.Discount,
-                            item.quantity,
+                            item?.quantity,
                             parseFloat(item?.sellingPrice),
                             user?.email,
                             item?.ProductionCost

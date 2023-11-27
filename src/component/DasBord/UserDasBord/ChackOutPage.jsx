@@ -24,15 +24,15 @@ const ChackOutPage = () => {
     const email = user?.email
     const dateTimeId = { date, time, id };
     const paindInfo ={id,image,shopname,sellingPrice,Discount,ProductionCost,email,date}
-    // const doc = new jsPDF();
-    // doc.text(`${shopname}`,100,20,null,null, "center");
-    // doc.addImage(`${image}`, "JPEG", 15, 40, 180, 100);
-    // doc.text(`Product Name :${shopname}`, 20, 160);
-    // doc.text(`selling Price :${sellingPrice}`, 20, 170);
-    // doc.text(`Discount Price :${Discount}`, 20, 180);
-    // doc.save(`${shopname}.pdf`)
-    //  const filterData = chackOut?.filter((itemData) => itemData._id !== id);
-    // setChakOut(filterData);
+    const doc = new jsPDF();
+    doc.text(`${shopname}`,100,20,null,null, "center");
+    doc.addImage(`${image}`, "JPEG", 15, 40, 180, 100);
+    doc.text(`Product Name :${shopname}`, 20, 160);
+    doc.text(`selling Price :${sellingPrice}`, 20, 170);
+    doc.text(`Discount Price :${Discount}`, 20, 180);
+    doc.save(`${shopname}.pdf`)
+     const filterData = chackOut?.filter((itemData) => itemData._id !== id);
+    setChakOut(filterData);
     await axiosPublic.post("/getPaidUpdateData", dateTimeId)
    const {data:info} = await axiosPublic.post("/paindInfo", paindInfo)
    if(info.insertedId){

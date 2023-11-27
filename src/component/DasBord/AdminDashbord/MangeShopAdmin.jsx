@@ -1,19 +1,25 @@
 import { useEffect, useState } from "react";
 import AllUser from "../../../Hook/AllUser";
 import AdminSecoure from "../../../Hook/AdminSecoure";
+import Loding from "../../Home/loder/Loding";
 
 
 const MangeShopAdmin = () => {
     const axiosSecure = AdminSecoure()
     const [alluser,setUser]=useState([])
+    const [loding,setLoder]=useState(true)
    
     useEffect(()=>{
         axiosSecure.get('/alluser')
         .then(res=>{
             const filter =res?.data?.filter(user=>user.roll=="manager")
            setUser(filter)
+           setLoder(false)
         })
     },[axiosSecure])
+    if (loding) {
+      return <Loding></Loding>
+    }
 
     return (
         <div>

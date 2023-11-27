@@ -2,16 +2,23 @@ import { useContext, useEffect, useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import AdminSecoure from "../../Hook/AdminSecoure";
 import { MyContext } from "../../Route/AuthProvider";
+import Loding from "../Home/loder/Loding";
 
 const DashbordContainer = () => {
   const axoisSecure = AdminSecoure();
   const { user } = useContext(MyContext);
   const [chackuser, setUser] = useState({});
+  const [loding,setLoding]=useState(true)
   useEffect(() => {
     axoisSecure.get(`/user?email=${user?.email}`).then((res) => {
       setUser(res.data);
+      setLoding(false)
     });
   }, [axoisSecure, user?.email]);
+  if (loding) {
+    return <Loding></Loding>
+  }
+
   return (
     <div>
       <div className="grid grid-cols-12 gap-12 ">
