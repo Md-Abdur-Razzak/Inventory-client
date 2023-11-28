@@ -5,6 +5,7 @@ import PublicApi from "../../../Hook/PublicApi";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import Loding from "../../Home/loder/Loding";
+import { Helmet } from "react-helmet-async";
 
 const SalesCollection = () => {
   const axiosSecure = AdminSecoure();
@@ -44,6 +45,9 @@ const SalesCollection = () => {
   }
   return (
     <div>
+      <Helmet>
+        <title>StoreShop ||Sales Collection</title>
+      </Helmet>
       <div>
         <div className="join flex justify-center ">
           <form onSubmit={handelSearch}>

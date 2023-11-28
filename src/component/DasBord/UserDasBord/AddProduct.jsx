@@ -5,40 +5,39 @@ import { userimage } from "../../../utis/imageUplode";
 import { toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import Loding from "../../Home/loder/Loding";
+import { Helmet } from "react-helmet-async";
 
 const AddProduct = () => {
   const adminSecure = AdminSecoure();
   const { user } = useContext(MyContext);
- const navigate = useNavigate()
-//   const [shopUser, setShopUser] = useState({});
+  const navigate = useNavigate();
+  //   const [shopUser, setShopUser] = useState({});
 
-//   useEffect(() => {
-//     adminSecure.get(`/user?email=${user?.email}`).then((res) => {
-//       setShopUser(res?.data?.users);
-//     });
-//   }, [user?.email, adminSecure]);
-//   const { _id, name, email ,limit} = shopUser || {};
-  const {data,isLoading,refetch}=useQuery({
-    queryKey:["lomit",user?.email,adminSecure],
-    queryFn:async()=>{
-            const {data}=await adminSecure.get(`/user?email=${user?.email}`)
-            return data
-    }
-  })
+  //   useEffect(() => {
+  //     adminSecure.get(`/user?email=${user?.email}`).then((res) => {
+  //       setShopUser(res?.data?.users);
+  //     });
+  //   }, [user?.email, adminSecure]);
+  //   const { _id, name, email ,limit} = shopUser || {};
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ["lomit", user?.email, adminSecure],
+    queryFn: async () => {
+      const { data } = await adminSecure.get(`/user?email=${user?.email}`);
+      return data;
+    },
+  });
   if (isLoading) {
-    return <h1>loding-----------</h1>
+    return <Loding></Loding>;
   }
 
- const { _id, name, email ,limit} = data || {};
-
- 
+  const { _id, name, email, limit } = data || {};
 
   const handelAddData = async (e) => {
-
     e.preventDefault();
-    if (limit<=0) {
-        navigate('/dasbord/paymentManager')
-        return toast.warn("your product Limit end ")
+    if (limit <= 0) {
+      navigate("/dasbord/paymentManager");
+      return toast.warn("your product Limit end ");
     }
     const from = e.target;
     const shopName = from.shopName.value;
@@ -48,20 +47,14 @@ const AddProduct = () => {
     const ProductionCost = parseInt(from.ProductionCost.value);
     const ProfitMargin = parseInt(from.ProfitMargin.value);
     const Discount = from.Discount.value;
-     const logo = from.image.files[0];
-    
-  
+    const logo = from.image.files[0];
 
-   
     let tax = ProductionCost * (7.5 / 100);
     let profit = ProductionCost * (ProfitMargin / 100);
-    let sale =(ProductionCost + tax + profit);
-    let sellingPrice =sale.toFixed(3);
-
+    let sale = ProductionCost + tax + profit;
+    let sellingPrice = sale.toFixed(3);
 
     const { display_url } = await userimage(logo);
-
-   
 
     const prodectsAllDetails = {
       shopName,
@@ -76,22 +69,24 @@ const AddProduct = () => {
       name,
       email,
       shopId: _id,
-   
+
       sellingPrice,
-      SaleCount:0
+      SaleCount: 0,
     };
     console.log(prodectsAllDetails);
-        
-        const{data}=await adminSecure.post('/shopProduct',prodectsAllDetails)
-       if (data.insertedId) {
-        await refetch()
-        toast.success("Product Add Successfuly")
-       }
 
+    const { data } = await adminSecure.post("/shopProduct", prodectsAllDetails);
+    if (data.insertedId) {
+      await refetch();
+      toast.success("Product Add Successfuly");
+    }
   };
 
   return (
     <div>
+      <Helmet>
+        <title>StoreShop ||Add Product </title>
+      </Helmet>
       <div className="form-control">
         <div className="hero min-h-screen dark:bg-black">
           <div className="hero-content w-[80%] max-[769px]:w-[90%] flex-col ">
@@ -103,7 +98,7 @@ const AddProduct = () => {
                 <div className="md:flex justify-between md:gap-4">
                   <div className="form-control w-full">
                     <label className="label">
-                      <span className="label-text">Shop Name</span>
+                      <span className="label-text">Product Name</span>
                     </label>
                     <input
                       type="text"
@@ -178,7 +173,7 @@ const AddProduct = () => {
                     required
                   />
                 </div>
-                
+
                 <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text">Discount</span>
@@ -194,13 +189,13 @@ const AddProduct = () => {
                 <div className="form-control mt-3  ">
                   <div className="form-control">
                     <label className="label">
-                      <span className="label-text">Shop Logo</span>
+                      <span className="label-text">Product Image</span>
                     </label>
                     <input type="file" name="image" required />
                   </div>
                 </div>
                 <div className="form-control mt-6">
-                  <button className="btn bg-red-500">Create Shop</button>
+                  <button className="btn bg-red-500">Add Product</button>
                 </div>
               </form>
             </div>

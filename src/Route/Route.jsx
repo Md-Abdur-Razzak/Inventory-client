@@ -17,10 +17,12 @@ import SalesSummry from "../component/DasBord/UserDasBord/SalesSummry";
 import MangeShopAdmin from "../component/DasBord/AdminDashbord/MangeShopAdmin";
 import SaleSummryAdmin from "../component/DasBord/AdminDashbord/SaleSummryAdmin";
 import WatchDemo from "../component/Home/HomePages/WatchDemo";
+import ErrorPage from "../component/Home/HomePages/ErrorPage";
 
 export const myRoute = createBrowserRouter([{
     path:"/",
     element:<Maincontainer></Maincontainer>,
+    errorElement:<ErrorPage></ErrorPage>,
     children:[
         {
             path:'/',

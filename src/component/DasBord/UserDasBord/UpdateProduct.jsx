@@ -2,6 +2,7 @@ import { useLoaderData } from "react-router-dom";
 import PublicApi from "../../../Hook/PublicApi";
 import { userimage } from "../../../utis/imageUplode";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 
 const UpdateProduct = () => {
@@ -14,10 +15,10 @@ const UpdateProduct = () => {
         shopInfo,
         shopArea,
         ProductionCost,
-        display_url,
+
         ProfitMargin,
         Discount,
-       BuyingPrice
+
     
         
      
@@ -34,7 +35,7 @@ const UpdateProduct = () => {
         const ProductionCost = from.ProductionCost.value;
         const ProfitMargin = parseInt(from.ProfitMargin.value);
         const Discount = from.Discount.value;
-        const  BuyingPrice = parseInt(from. BuyingPrice.value)
+      
         const logo = from.image.files[0];
         const {display_url} =await  userimage(logo)
 
@@ -47,7 +48,7 @@ const UpdateProduct = () => {
             display_url,
             ProfitMargin,
             Discount,
-           BuyingPrice,
+          
            
            
         }
@@ -60,13 +61,16 @@ const UpdateProduct = () => {
       }
     return (
         <div>
+          <Helmet>
+        <title>StoreShop ||Update Prodect</title>
+      </Helmet>
         <div className="form-control">
           <div className="hero min-h-screen dark:bg-black">
             <div className="hero-content w-[80%] max-[769px]:w-[90%] flex-col ">
               <div className="text-center ">
-                <h1 className="text-5xl font-bold">Products add </h1>
+                <h1 className="text-5xl font-bold">Update Product  </h1>
               </div>
-              <div className="card flex-shrink-0 w-full  shadow-2xl bg-base-100">
+              <div className="card flex-shrink-0 w-full  shadow-2xl bg-base-100 mt-9">
                 <form onSubmit={handelAddData} className="card-body">
                   <div className="md:flex justify-between md:gap-4">
                     <div className="form-control w-full">
@@ -150,19 +154,7 @@ const UpdateProduct = () => {
                       required
                     />
                   </div>
-                  <div className="form-control w-full">
-                    <label className="label">
-                      <span className="label-text">Buying Price</span>
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Buying Price"
-                      name="BuyingPrice"
-                      defaultValue={ BuyingPrice}
-                      className="input input-bordered w-full"
-                      required
-                    />
-                  </div>
+                
                   <div className="form-control w-full">
                     <label className="label">
                       <span className="label-text">Discount</span>
@@ -178,13 +170,13 @@ const UpdateProduct = () => {
                   <div className="form-control mt-3  ">
                     <div className="form-control">
                       <label className="label">
-                        <span className="label-text">Shop image</span>
+                        <span className="label-text"> image</span>
                       </label>
                       <input type="file" name="image"  required />
                     </div>
                   </div>
                   <div className="form-control mt-6">
-                    <button className="btn bg-red-500">Create Shop</button>
+                    <button className="btn bg-red-500">Update</button>
                   </div>
                 </form>
               </div>

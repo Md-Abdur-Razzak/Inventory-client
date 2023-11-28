@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from "react";
 import AdminSecoure from "../../../Hook/AdminSecoure";
-import AllUser from "../../../Hook/AllUser";
+
 import PublicApi from "../../../Hook/PublicApi";
 import Loding from "../../Home/loder/Loding";
+import { useRef } from 'react';
+import emailjs from '@emailjs/browser';
+import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
+import takaImage from '../../../assets/profit.png'
+import totallProduct from '../../../assets/product-removebg-preview.png'
+import salesProduct from '../../../assets/saleng2.png'
+import { GrNext, GrPrevious } from "react-icons/gr";
+import { useQuery } from "@tanstack/react-query";
 
 const SaleSummryAdmin = () => {
   const axiosSeure = AdminSecoure();
@@ -10,17 +19,16 @@ const SaleSummryAdmin = () => {
   const [amount, setAmount] = useState();
   const [allProduct, setAllProduct] = useState([]);
   const [sales, setSale] = useState([]);
-  const [user, SetUser] = useState([]);
+
+  const [email, setemail] = useState([]);
+  const form = useRef();
+  const [loding,setLoding]=useState(true)
+  const [page, setPage] = useState(0);
 
   // -----------------pagenation start---------------------
-  const [totallDataCount, setTotallDataCount] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [selectvalue, currentShowPage] = useState(2);
+  // const [totallDataCount, setTotallDataCount] = useState(0);
 
-  const sumPages = Math.ceil(totallDataCount / selectvalue);
-  console.log({sumPages});
-  const pages = [...Array(sumPages).keys()];
-const [loding,setLoding]=useState(true)
+
 
   useEffect(() => {
     axiosSeure.get("/amount").then((res) => {
@@ -36,30 +44,39 @@ const [loding,setLoding]=useState(true)
       setSale(res.data.length);
       setLoding(false)
     });
-    // axiosSeure.get("/alluser").then((res) => {
-    //   SetUser(res.data);
-    //   setLoding(false)
-    // });
-    axiosPublic.get(`/count`).then((res) =>{
-       setTotallDataCount(res.data.count)
-       setLoding(false)
-      });
-      // page=${currentvalue}&size=${selectvalue}`
+  
+    // axiosPublic.get(`/count`).then((res) =>{
+    //    setTotallDataCount(res.data.count)
+    //    setLoding(false)
+    //   });
+   
   
   }, [axiosSeure,axiosPublic]);
-  useEffect(()=>{
-    axiosPublic.get(`/pagination?page=${currentPage}&size=${selectvalue}`)
-    .then((res) => {
-     SetUser(res.data)
-     setLoding(false)
-    })
-  },[axiosPublic,selectvalue,currentPage])
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["adminProgation", page],
+    queryFn: async () => {
+      const res = await axiosPublic.get(
+        `/pagination?page=${page}`
+      )
+      console.log(res);
+      return res?.data;
+    },
+  });
+
+  if (isLoading) {
+    return <Loding></Loding>
+  }
+
+  const totalPage = Math.ceil(data?.lengthData.length / 5);
+  const pages = [...new Array(totalPage).fill(0)];
+  
+
 
   // -----------------pagenation end----------------------
 
-if (loding) {
-  return <Loding></Loding>
-}
+
+
 
   // useEffect(() => {
   //   axiosPublic.get(`/pagination?page=${currentPage}&size=${selectvalue}`)
@@ -67,84 +84,71 @@ if (loding) {
   // }, [axiosPublic,selectvalue,currentPage]);
 
   // ----------------------------pagination-------------------------------
-  const handelClick = (page) => {
-    setCurrentPage(page);
-    console.log(page);
-  };
-  const handelChange = (e) => {
-    e.preventDefault()
-    const data =parseInt( e.target.value)
-    console.log(data);
-    currentShowPage(data);
-    setCurrentPage(1)
-  };
+//   const handelClick = (page) => {
+//     setCurrentPage(page);
+//     console.log(page);
+//   };
+//   const handelChange = (e) => {
+//     e.preventDefault()
+//     const data =parseInt( e.target.value)
+//     console.log(data);
+//     currentShowPage(data);
+//     setCurrentPage(1)
+//   };
+//   const handelPrePage = ()=>{
+//     if (currentPage>0) {
+//       setCurrentPage(currentPage-1)
+//     }
+// }
+//   const handelPreNext = ()=>{
 
+//     setCurrentPage(currentPage+1)
+
+// }
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm('service_mhk95kh', 'template_nugeeod', form.current, '6e_NFxreZRsQsS1GH')
+      .then((result) => {
+         document.getElementById("my_modal_3").close()
+          toast.success("email send successfuly")
+      }, (error) => {
+          console.log(error.text);
+      });
+    } 
   return (
     <div>
+        <Helmet>
+        <title>StoreShop || Sales Summary Admin</title>
+      </Helmet>
       <div>
-        <div className="stats shadow">
-          <div className="stat">
-            <div className="stat-figure text-secondary">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                className="inline-block w-8 h-8 stroke-current"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                ></path>
-              </svg>
-            </div>
+        <div className="shadow">
+          <div className="">
+          <div className="grid grid-cols-3 p-4">
+                <div className="">
+                  <div className="flex flex-col justify-center items-center">
+                    <img className="w-9" src={takaImage} alt="" />
+                    <div className="stat-desc text-xl">Total Daler </div>
+                    <div className="text-3xl font-extrabold">$ {(amount/100)}</div>
+                  </div>
+                  </div>
 
-            <div className="stat-value">{amount}</div>
-            <div className="stat-desc text-xl">Total Taka </div>
+                  <div className="flex flex-col justify-center items-center">
+                    <img className="w-9" src={totallProduct} alt="" />
+                    <div className="stat-desc text-xl">Total Product</div>
+                    <div  className="text-3xl font-extrabold">{allProduct}</div>
+                    </div>
+
+                    <div className="flex flex-col justify-center items-center">
+                    <img className="w-9" src={salesProduct} alt="" />
+                    <div className="stat-desc text-xl">Total sales Product</div>
+                    <div  className="text-3xl font-extrabold">{sales}</div>
+                  </div>
+
+           
           </div>
 
-          <div className="stat">
-            <div className="stat-figure text-secondary">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                className="inline-block w-8 h-8 stroke-current"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-                ></path>
-              </svg>
-            </div>
-
-            <div className="stat-value">{allProduct}</div>
-            <div className="stat-desc text-xl">Total Product</div>
-          </div>
-
-          <div className="stat">
-            <div className="stat-figure text-secondary">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                className="inline-block w-8 h-8 stroke-current"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
-                ></path>
-              </svg>
-            </div>
-
-            <div className="stat-value">{sales}</div>
-            <div className="stat-desc text-xl">Total sales Product</div>
-          </div>
+        
         </div>
       </div>
       {/* table show all users  */}
@@ -166,7 +170,8 @@ if (loding) {
           </thead>
           <tbody>
             {/* row 1 */}
-            {user?.map((item, index) => {
+     
+            {data?.count?.map((item, index) => {
               return (
                 <tr key={item._id}>
                   <th>
@@ -188,7 +193,12 @@ if (loding) {
                     {item?.roll ? (
                       ""
                     ) : (
-                      <button className="btn bg-red-400 text-white">
+                      <button
+                      onClick={()=>{
+                        setemail(item?.email)
+                        document.getElementById("my_modal_3").showModal()
+                      }}
+                       className="btn bg-red-400 text-white">
                         Send Promotional Email
                       </button>
                     )}
@@ -199,42 +209,59 @@ if (loding) {
           </tbody>
         </table>
       </div>
-     <div className="flex items-center justify-center">
-     <div className="text-center ">
-        {pages?.length == 0
-          ? ""
-          : pages?.map((page) => (
-              <button
-                className={`${
-                  currentPage == page+1  && "bg-red-700"
-                } btn bg-green-700 text-white`}
-                key={page + 1}
-                onClick={() => handelClick(page+1)}
-              >
-                {page+1 }
-              </button>
-            ))}
-      </div>
-      <div>
-        {pages?.length == 0 ? (
-          ""
-        ) : (
-          <select
-            className="btn bg-gray-800 text-white"
-            onChange={handelChange}
-            defaultChecked={selectvalue}
+      <div className="flex justify-center items-center gap-2">
+        <button
+          className={""}
+          onClick={() => setPage(page > 0 ? page - 1 : 0)}
+        >
+           <GrPrevious></GrPrevious>
+        </button>
+        {pages.map((item, index) => (
+          <button
+            className={`w-7 h-7 flex justify-center items-center border border-[#7cb518] rounded-full ${
+              index === page ? "bg-[#7cb518]" : "bg-white"
+            }`}
+            key={index}
+            onClick={() => setPage(index)}
           >
-            <option value="2">2</option>
-            <option value="3" >
-             3
-            </option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-          </select>
-        )}
+            {index + 1}
+          </button>
+        ))}
+        <button
+          className={""}
+          onClick={() =>
+            setPage(page < pages.length - 1 ? page + 1 : pages.length - 1)
+          }
+        >
+        <GrNext></GrNext>
+        </button>
       </div>
-     </div>
+
+     <dialog id="my_modal_3" className="modal">
+            <div className="modal-box">
+              <form method="dialog">
+                {/* if there is a button in form, it will close the modal */}
+                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                  ✕
+                </button>
+              </form>
+              <div>
+              <form ref={form} onSubmit={sendEmail}>
+                        {/* <label>Name</label>
+                        <input className="border-pink-300 rounded-md border w-full py-4" type="text" name="user_name" /> */}
+                        <label>Email</label>
+                        <input defaultValue={email} className="border-pink-300 px-4 rounded-md border w-full py-4" type="email" name="user_email" />
+                        <label>Message</label>
+                        <textarea className="border border-pink-300 px-4  rounded-md w-full py-4" name="message" />
+                        <input className="border-pink-300 bg-red-400 text-white text-xl font-bold rounded-md border w-full py-4" type="submit" value="Send" />
+                    </form>
+              </div>
+              
+            </div>
+          </dialog>
     </div>
+    </div>
+   
   );
 };
 

@@ -5,6 +5,7 @@ import Loding from "../../Home/loder/Loding";
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 
 const MangeShopAdmin = () => {
@@ -40,6 +41,9 @@ const MangeShopAdmin = () => {
       }  
   return (
     <div>
+        <Helmet>
+        <title>StoreShop || Manage Shop Admin</title>
+      </Helmet>
       <div>
         <div className="overflow-x-auto rounded-md mt-9">
           <table className="table">
@@ -70,7 +74,7 @@ const MangeShopAdmin = () => {
                         <div className="avatar">
                           <div className="mask mask-squircle w-12 h-12">
                             <img
-                              src={item?.display_url}
+                              src={item?.logo}
                               alt="Avatar Tailwind CSS Component"
                             />
                           </div>

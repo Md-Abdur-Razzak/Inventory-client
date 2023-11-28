@@ -2,13 +2,13 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { MyContext } from "../../../Route/AuthProvider";
 import Users from "../../../Hook/Users";
-
+import logo from '../../../assets/logo-removebg-preview.png'
 const Navbar = () => {
   const { user ,logOutUser } = useContext(MyContext);
   const {data}=Users()
-  console.log(data);
+
   return (
-    <div className="navbar bg-base-100 dark:text-white sticky inset-0 z-10  rounded-none border  bg-opacity-30  text-black shadow-md backdrop-blur-2xl backdrop-saturate-200 lg:px-2 lg:py-2">
+    <div className="navbar  bg-base-100 dark:text-white dark:bg-[#191945c1] sticky inset-0 z-10  rounded-none border  bg-opacity-30  text-black shadow-md backdrop-blur-2xl backdrop-saturate-200 lg:px-2 md:py-4 max-[769px]:py-9">
       <div className="navbar-start ">
         <div className="dropdown md:px-12">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -29,8 +29,8 @@ const Navbar = () => {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm text-xl dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-          >
+            className="menu menu-sm text-xl dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+          
             <NavLink
               to={"/"}
               className={({ isActive, isPending }) =>
@@ -80,17 +80,51 @@ const Navbar = () => {
             >
               Registration
             </NavLink>
+            {
+         data?.manager?
+             <NavLink
+            to={"/dasbord/projectManaget"}
+            className={({ isActive, isPending }) =>
+              isActive
+                ? " text-white bg-red-500 btn"
+                : isPending
+                ? "pending"
+                : ""
+            }
+          >
+           {user?"Dashboard":""}
+          </NavLink> :'' 
+          
+          } 
+          {
+         data?.admin?
+             <NavLink
+            to={"/dasbord/manageshop"}
+            className={({ isActive, isPending }) =>
+              isActive
+                ? " text-white bg-red-500 btn"
+                : isPending
+                ? "pending"
+                : ""
+            }
+          >
+           {user?"Dashboard":""}
+          </NavLink> :'' 
+          
+          } 
+            
           </ul>
         </div>
-        <div className="md:flex flex-col justify-center items-center">
+        <div className='md:flex flex-col justify-center items-center max-[320px]:hidden'>
           <img
             src={
-              "https://i.ibb.co/Fs0ySSb/png-transparent-wi-fi-computer-network-scalable-graphics-icon-wifi-icon-angle-electronics-text-remov.png"
+             logo
             }
-            className="w-[100px] h-[70px] max-[426px]:w-[70px]"
+            className="xl:w-[100px] w-[80px]" 
           />
-          <h1 className="text-2xl font-extrabold max-[426px]:text-sm">
-            CAR DEALER
+          <h1 className='xl:text-2xl font-extrabold max-[426px]:text-sm'>
+         
+          STORE<span className="text-red-400">SHOP</span>
           </h1>
         </div>
       </div>
@@ -157,7 +191,7 @@ const Navbar = () => {
                 : ""
             }
           >
-           {user?"dasbord":""}
+           {user?"Dashboard":""}
           </NavLink> :'' 
           
           } 
@@ -173,16 +207,16 @@ const Navbar = () => {
                 : ""
             }
           >
-           {user?"dasbord":""}
+           {user?"Dashboard":""}
           </NavLink> :'' 
           
           } 
         </ul>
       </div>
-      <div className="navbar-end md:px-12 ">
+      <div className="navbar-end  md:pr-12">
         <div className="flex flex-col items-center">
         <label tabIndex={0} className="btn  btn-circle avatar">
-          <div className="w-12 rounded-full">
+          <div className="xl:w-12 rounded-full">
             {
                 user?.photoURL?<img
                 className="w-14 border border-blue-400  rounded-full"

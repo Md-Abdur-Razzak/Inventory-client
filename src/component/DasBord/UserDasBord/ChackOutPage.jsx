@@ -5,6 +5,7 @@ import moment from "moment";
 import { jsPDF } from "jspdf";
 import PublicApi from "../../../Hook/PublicApi";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const ChackOutPage = () => {
   // salesProduct
@@ -31,8 +32,10 @@ const ChackOutPage = () => {
     doc.text(`selling Price :${sellingPrice}`, 20, 170);
     doc.text(`Discount Price :${Discount}`, 20, 180);
     doc.save(`${shopname}.pdf`)
-     const filterData = chackOut?.filter((itemData) => itemData._id !== id);
+     const filterData = chackOut?.filter((itemData) => itemData.sId !== id);
     setChakOut(filterData);
+    console.log(filterData);
+    console.log(id);
     await axiosPublic.post("/getPaidUpdateData", dateTimeId)
    const {data:info} = await axiosPublic.post("/paindInfo", paindInfo)
    if(info.insertedId){
@@ -41,7 +44,10 @@ const ChackOutPage = () => {
   };
   return (
     <div>
-      data: {chackOut.length}
+
+    <Helmet>
+        <title>StoreShop ||Chack-Out</title>
+      </Helmet>
       <div>
         <div className="overflow-x-auto rounded-md mt-9">
           <table className="table">
@@ -84,6 +90,7 @@ const ChackOutPage = () => {
                     </td>
                     <td>{item?.shopName}</td>
                     <td>{item?.sId}</td>
+                
                     <td>{item?.quantity}</td>
                     <td>{item?.sellingPrice}</td>
                     <td>{item?.Discount}</td>

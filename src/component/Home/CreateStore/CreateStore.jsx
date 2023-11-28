@@ -4,6 +4,7 @@ import { userimage } from "../../../utis/imageUplode";
 import PublicApi from "../../../Hook/PublicApi";
 import Users from "../../../Hook/Users";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const CreateStore = () => {
     const {user}=useContext(MyContext)
@@ -42,11 +43,12 @@ const CreateStore = () => {
   return (
     <div>
       <div className="form-control">
+      <Helmet>
+        <title>StoreShop ||Create-Store</title>
+      </Helmet>
         <div className="hero min-h-screen bg-base-200 dark:bg-black">
           <div className="hero-content w-[50%] max-[769px]:w-[90%] flex-col ">
-            <div className="text-center ">
-              <h1 className="text-5xl font-bold">Products add </h1>
-            </div>
+           
             <div className="card flex-shrink-0 w-full  shadow-2xl bg-base-100">
               <form onSubmit={handelAddData} className="card-body">
                 <div className="md:flex justify-between md:gap-4">

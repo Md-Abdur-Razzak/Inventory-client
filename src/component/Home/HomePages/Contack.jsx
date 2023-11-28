@@ -1,21 +1,31 @@
-
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
+import { useEffect } from 'react';
 
 const Contack = () => {
+    useEffect(() => {
+        
+        AOS.init({
+          duration: 1000,
+          easing: 'ease-in-out',
+          once: false, 
+        });
+      }, []);
     return (
         <div className='w-full  p-12 bg-[#14114106] mt-9'>
-        <h1 className='flex justify-center text-4xl font-extrabold pb-12'>Contact <span className='ml-3 text-green-700'>Us</span></h1>
+        <h1 className='flex justify-center text-4xl font-extrabold pb-12'>Contact <span className='ml-3 text-red-700'>Us</span></h1>
        <div className='lg:w-[80%] mx-auto grid grid-cols-1 lg:grid-cols-3 md:mt-0 mt-9'>
             <div className='mt-2 lg:block flex flex-wrap gap-3 justify-center'>
-                <div className=' bg-green-700  text-white w-[250px] rounded-md p-4'>
+                <div  data-aos="flip-up" className=' bg-red-500 text-white w-[250px] rounded-md p-4'>
                     <h1 className='font-bold'><i className="fa-solid fa-location-dot"></i>  Office Location</h1>
                     <h1>2rd floor,Bashundhara Road</h1>
                 </div >
-                <div className=' bg-green-700 text-white w-[250px] rounded-md mt-3 p-4'>
+                <div  data-aos="flip-up" className=' bg-red-500 text-white w-[250px] rounded-md mt-3 p-4'>
                    <h1 className='font-bold'><i className="fa-solid fa-phone"></i> Contact No </h1>
                    <h1>+88 01701811157 </h1>
 
                 </div>
-                <div className=' bg-green-700  font-bold text-white mt-3 w-[250px] rounded-md p-4'>
+                <div  data-aos="flip-up" className=' bg-red-500  font-bold text-white mt-3 w-[250px] rounded-md p-4'>
                     <h1 className='font-bold'> <i className="fa-solid fa-envelope "></i><span> Email</span></h1>
                     <h1>razzak445444@gmail.com</h1>
                 </div>

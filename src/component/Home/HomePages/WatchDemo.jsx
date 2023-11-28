@@ -1,8 +1,13 @@
-import React from "react";
+
+import { Helmet } from "react-helmet-async";
+
 
 const WatchDemo = () => {
   return (
     <div className=" mt-12">
+     <Helmet>
+        <title>StoreShop ||WatchDemo</title>
+     </Helmet>
         <div className="flex justify-center text-4xl font-extrabold ">
             <h1>Overview Our Website</h1>
         </div>

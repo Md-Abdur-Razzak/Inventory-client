@@ -4,12 +4,15 @@ import { MyContext } from "../../../Route/AuthProvider";
 import { toast } from "react-toastify";
 import PublicApi from "../../../Hook/PublicApi";
 import Users from "../../../Hook/Users";
+import { Helmet } from "react-helmet-async";
+import Google from "./Google";
+import AdminSecoure from "../../../Hook/AdminSecoure";
 
 
 
 const Login = () => {
    
-    const publicAxios = PublicApi()
+    const Adminicsecure = AdminSecoure()
     const {singWithEmailAndPassword}=useContext(MyContext)
     const navigator = useNavigate()
     const {refetch}=Users()
@@ -22,16 +25,16 @@ const Login = () => {
   singWithEmailAndPassword(email,password)
 .then((res)=>{
  
-    publicAxios.get(`/user?email=${res.user.email}`)
+  Adminicsecure.get(`/user?email=${res.user.email}`)
     .then(res=>{
       console.log(res.data);
         if(res?.data?.roll=="manager"){
            refetch()
-          navigator('/dasbord/projectManaget')
+        navigator('/dasbord/projectManaget')
         }
         else if (res?.data?.roll=="admin") {
          refetch()
-          navigator('/dasbord/manageshop')
+      navigator('/dasbord/manageshop')
         }
         else if(res?.data?.creatshop){
             navigator('/Create-Store')
@@ -51,6 +54,9 @@ const Login = () => {
 
     return (
         <div className='banner-section  pb-9 '>
+      <Helmet>
+        <title>StoreShop ||Login</title>
+      </Helmet>
         <div className=''>
        
         </div>
@@ -84,7 +90,7 @@ const Login = () => {
               </div>
               <div>
                 <div>
-                  
+                  <Google></Google>
                 </div >
                   <p className='text-[15px]'>Dont’t Have An Account ?<Link className='text-red text-blue-400 underline' to={'/registration'}> Registration</Link></p>
               </div>

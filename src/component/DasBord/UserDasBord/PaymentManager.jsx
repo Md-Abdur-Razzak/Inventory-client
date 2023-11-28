@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { Link, useLoaderData } from "react-router-dom";
 
 const PaymentManager = () => {
@@ -5,6 +6,9 @@ const PaymentManager = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>StoreShop ||Subscription & payment</title>
+      </Helmet>
       <div className="grid grid-cols-3 gap-4">
         {data?.map((item) => {
           return (
