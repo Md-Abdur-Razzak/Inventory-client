@@ -31,11 +31,12 @@ const ChackOutPage = () => {
     doc.text(`Product Name :${shopname}`, 20, 160);
     doc.text(`selling Price :${sellingPrice}`, 20, 170);
     doc.text(`Discount Price :${Discount}`, 20, 180);
+    doc.text(`Date:${date}`, 20, 190);
+    doc.text(`time:${time}`, 20, 200);
     doc.save(`${shopname}.pdf`)
      const filterData = chackOut?.filter((itemData) => itemData.sId !== id);
     setChakOut(filterData);
-    console.log(filterData);
-    console.log(id);
+   
     await axiosPublic.post("/getPaidUpdateData", dateTimeId)
    const {data:info} = await axiosPublic.post("/paindInfo", paindInfo)
    if(info.insertedId){
@@ -106,7 +107,7 @@ const ChackOutPage = () => {
                             item?.ProductionCost
                           )
                         }
-                        className="text-xl btn bg-red-500"
+                        className="text-xl btn text-white bg-red-500"
                       >
                         Get Paid
                       </button>

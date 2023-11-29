@@ -72,7 +72,7 @@ const ChackOutFrom = ({data}) => {
             setErrorPage('')
       
           const{data}= await axiosSecure.post(`/limitUpdate?email=${user?.email}`,{limit})
-          console.log(data);
+          
         }
         
       

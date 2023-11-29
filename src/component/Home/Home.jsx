@@ -6,6 +6,7 @@ import Testimonial from "./HomePages/Testimonial";
 import Navbar from "./Navbar/Navbar";
 import FaQPage from "./HomePages/FaQPage";
 import OurServices from "./HomePages/OurServices";
+import ALLPilans from "./HomePages/ALLPilans";
 
 const Home = () => {
   return (
@@ -14,9 +15,10 @@ const Home = () => {
         <title>StoreShop ||Home</title>
       </Helmet>
       <Bannder></Bannder>
- <OurServices></OurServices> 
+     <OurServices></OurServices> 
        <FaQPage></FaQPage>
- <Testimonial></Testimonial>
+       <ALLPilans></ALLPilans>
+      <Testimonial></Testimonial>
       <Contack></Contack>
       <Footer></Footer>  
     </div>

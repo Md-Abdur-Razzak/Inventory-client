@@ -83,7 +83,7 @@ const ProjectManagement = () => {
                     </th>
 
                     <th>Image</th>
-                    <th>shop Name</th>
+                    <th>Product Name</th>
                     <th>quantity</th>
                     <th>SaleCount</th>
                     <th></th>

@@ -73,7 +73,7 @@ const AddProduct = () => {
       sellingPrice,
       SaleCount: 0,
     };
-    console.log(prodectsAllDetails);
+    
 
     const { data } = await adminSecure.post("/shopProduct", prodectsAllDetails);
     if (data.insertedId) {

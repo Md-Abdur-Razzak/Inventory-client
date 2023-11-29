@@ -58,7 +58,7 @@ const CreateStore = () => {
                     </label>
                     <input
                       type="text"
-                      placeholder="Product Name"
+                      placeholder="Shop Name"
                       name="shopName"
                       className="input input-bordered  "
                       required
@@ -104,7 +104,7 @@ const CreateStore = () => {
                     <input
                       type="text"
                       defaultValue={user?.displayName}
-                      disabled
+                      readOnly
                       name='sWonerName'
                       className="input input-bordered w-full"
                       required
@@ -117,7 +117,7 @@ const CreateStore = () => {
                     <input
                       type="text"
                      defaultValue={user?.email}
-                     disabled
+                     readOnly
                       name="shopEmail"
                       className="input input-bordered w-full"
                       required

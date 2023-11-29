@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import AdminSecoure from "../../Hook/AdminSecoure";
 import { MyContext } from "../../Route/AuthProvider";
 import Loding from "../Home/loder/Loding";
@@ -17,6 +17,7 @@ const DashbordContainer = () => {
   const { user,logOutUser } = useContext(MyContext);
   const [chackuser, setUser] = useState({});
   const [loding, setLoding] = useState(true);
+  const navigator = useNavigate()
   useEffect(() => {
     axoisSecure.get(`/user?email=${user?.email}`).then((res) => {
       setUser(res.data);
@@ -158,7 +159,10 @@ const DashbordContainer = () => {
             <Link to={"/"} className="btn bg-red-500 text-white">
               Home
             </Link>
-            <button onClick={()=>logOutUser()} className="btn bg-red-500 text-white">logOut </button>
+            <button onClick={()=>
+          {    logOutUser()
+              navigator('/')}
+            } className="btn bg-red-500 text-white">logOut </button>
           </div>
         </div>
         <div className="col-span-9 h-[100%] ">

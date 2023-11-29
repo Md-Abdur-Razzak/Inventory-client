@@ -17,7 +17,7 @@ const OurServices = () => {
     });
   }, []);
   return (
-    <div className="xl:w-[80%] lg:w-[90%] w-[90%] mx-auto mt-9">
+    <div className="xl:w-[80%] lg:w-[90%] w-[90%] mx-auto mt-[90px]">
       <div className="flex justify-center ">
         <h1 className=" text-4xl font-extrabold">Our Services </h1>
       </div>

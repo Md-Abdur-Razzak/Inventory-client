@@ -9,8 +9,9 @@ import { Helmet } from "react-helmet-async";
 
 const Registration = () => {
   const { creatEmilAndPassword } = useContext(MyContext);
+  const{logOutUser}=useContext(MyContext)
    const navigate = useNavigate();
-  // const publicAxios = PublicApi();
+   const axPublic = PublicApi();
 
   const handelRegistration = async (e) => {
     e.preventDefault();
@@ -19,7 +20,7 @@ const Registration = () => {
    
     const name = e.target.name.value;
     const image = e.target.image.files[0];
-    console.log(email, password);
+ 
 
     if (!/^(?=.*[A-Z])(?=.*[\W_]).{6,}$/.test(password)) {
       return toast.error(
@@ -36,10 +37,17 @@ const Registration = () => {
           displayName: name,
           photoURL: display_url,
         });
-
-        navigate("/Create-Store");
-        window.location.reload()
-        return toast.success("congratulations!  Registration successful ");
+        const userInfo = { name, display_url, email };
+     
+   
+          
+            axPublic.post("/user", userInfo)
+            .then(res=>{console.log()})
+        
+            logOutUser()
+            navigate("/login");
+        
+        return toast.success("congratulations!  Registration successful plase Login Now! ");
       })
       .catch(() => {
         return toast.error("email already exists ");

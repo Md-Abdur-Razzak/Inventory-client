@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import AllUser from "../../../Hook/AllUser";
 import AdminSecoure from "../../../Hook/AdminSecoure";
 import Loding from "../../Home/loder/Loding";
 import React, { useRef } from 'react';
@@ -56,7 +55,7 @@ const MangeShopAdmin = () => {
 
                 <th>Shop Logo</th>
                 <th>Shop Name</th>
-                <th>Product Linit</th>
+                <th>Product Limit</th>
                 <th>Shop Description</th>
                 <th></th>
               </tr>
@@ -82,7 +81,7 @@ const MangeShopAdmin = () => {
                         <div></div>
                       </div>
                     </td>
-                    <td>{item?.shopName}</td>
+                    <td>{item?.storeName}</td>
                     <td>{item.limit}</td>
                     <td>{item?.shopInfo}</td>
 

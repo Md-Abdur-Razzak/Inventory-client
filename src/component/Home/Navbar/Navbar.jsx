@@ -8,7 +8,7 @@ const Navbar = () => {
   const {data}=Users()
 
   return (
-    <div className="navbar  bg-base-100 dark:text-white dark:bg-[#191945c1] sticky inset-0 z-10  rounded-none border  bg-opacity-30  text-black shadow-md backdrop-blur-2xl backdrop-saturate-200 lg:px-2 md:py-4 max-[769px]:py-9">
+    <div className="navbar  bg-base-100 dark:text-white dark:bg-[#191945c1] sticky inset-0 z-10  rounded-none   bg-opacity-30  text-black backdrop-blur-2xl backdrop-saturate-200 lg:px-2 md:py-4 max-[769px]:py-9">
       <div className="navbar-start ">
         <div className="dropdown md:px-12">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">

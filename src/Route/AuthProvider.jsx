@@ -9,6 +9,7 @@ import {
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../firebase/firebase.config";
 import PublicApi from "../Hook/PublicApi";
+import { toast } from "react-toastify";
 
 
 
@@ -37,10 +38,10 @@ const AuthProvider = ({ children }) => {
          }
   useEffect(() => {
     const unsubcribe = onAuthStateChanged(auth, (user) => {
-      const display_url = user?.photoURL
-      const name = user?.displayName
+      // const display_url = user?.photoURL
+      // const name = user?.displayName
       const email = user?.email
-    
+
       setCurrentUser(user);
       if (user) {
         axPublic.post('/jwt',{email})
@@ -57,10 +58,15 @@ const AuthProvider = ({ children }) => {
       else{
         localStorage.removeItem("token")
       }
-      const userInfo = { name, display_url, email };
-
-      axPublic.post("/user", userInfo)
-      .then(res=>{})
+      // const userInfo = { name, display_url, email };
+     
+      // if(user?.email){
+        
+      //     axPublic.post("/user", userInfo)
+      //     .then(res=>{
+      //     console.log();
+      //     })
+      // }
      
       
       setLoder(false)

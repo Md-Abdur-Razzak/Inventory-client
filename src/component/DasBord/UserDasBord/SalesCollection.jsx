@@ -32,11 +32,11 @@ const SalesCollection = () => {
   if (loding) {
     return <Loding></Loding>
   }
-  console.log(salesDataStart);
+
   const handelSearch = (e)=>{
     e.preventDefault()
     const id = e.target.serch.value
-    console.log(id);
+   
     const filter = salesDataStart?.filter(serch=>serch._id == id)
     console.log(filter);
     setSalesData(filter)

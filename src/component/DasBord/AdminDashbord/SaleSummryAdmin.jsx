@@ -13,6 +13,27 @@ import salesProduct from '../../../assets/saleng2.png'
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { useQuery } from "@tanstack/react-query";
 
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid } from "recharts";
+
+const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
+
+const getPath = (x, y, width, height) => {
+  return `M${x},${y + height}C${x + width / 3},${y + height} ${x + width / 2},${
+    y + height / 3
+  }
+  ${x + width / 2}, ${y}
+  C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${y + height} ${
+    x + width
+  }, ${y + height}
+  Z`;
+};
+
+const TriangleBar = (props) => {
+  const { fill, x, y, width, height } = props;
+
+  return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
+};
+
 const SaleSummryAdmin = () => {
   const axiosSeure = AdminSecoure();
   const axiosPublic = PublicApi();
@@ -25,9 +46,7 @@ const SaleSummryAdmin = () => {
   const [loding,setLoding]=useState(true)
   const [page, setPage] = useState(0);
 
-  // -----------------pagenation start---------------------
-  // const [totallDataCount, setTotallDataCount] = useState(0);
-
+  
 
 
   useEffect(() => {
@@ -45,10 +64,7 @@ const SaleSummryAdmin = () => {
       setLoding(false)
     });
   
-    // axiosPublic.get(`/count`).then((res) =>{
-    //    setTotallDataCount(res.data.count)
-    //    setLoding(false)
-    //   });
+ 
    
   
   }, [axiosSeure,axiosPublic]);
@@ -59,7 +75,7 @@ const SaleSummryAdmin = () => {
       const res = await axiosPublic.get(
         `/pagination?page=${page}`
       )
-      console.log(res);
+     
       return res?.data;
     },
   });
@@ -73,38 +89,25 @@ const SaleSummryAdmin = () => {
   
 
 
-  // -----------------pagenation end----------------------
+
+  const chart = [
+    {
+      name: "Total Daler",
+      uv: (amount/100),
+    },
+    {
+      name: "Totall Product",
+      uv: parseInt(allProduct),
+    },
+    {
+      name: "Total Sales Product",
+      uv:sales,
+    },
+   
+  ];
 
 
 
-
-  // useEffect(() => {
-  //   axiosPublic.get(`/pagination?page=${currentPage}&size=${selectvalue}`)
-  //   .then((res) => console.log(res.data))
-  // }, [axiosPublic,selectvalue,currentPage]);
-
-  // ----------------------------pagination-------------------------------
-//   const handelClick = (page) => {
-//     setCurrentPage(page);
-//     console.log(page);
-//   };
-//   const handelChange = (e) => {
-//     e.preventDefault()
-//     const data =parseInt( e.target.value)
-//     console.log(data);
-//     currentShowPage(data);
-//     setCurrentPage(1)
-//   };
-//   const handelPrePage = ()=>{
-//     if (currentPage>0) {
-//       setCurrentPage(currentPage-1)
-//     }
-// }
-//   const handelPreNext = ()=>{
-
-//     setCurrentPage(currentPage+1)
-
-// }
   const sendEmail = (e) => {
     e.preventDefault();
 
@@ -145,6 +148,34 @@ const SaleSummryAdmin = () => {
                     <div  className="text-3xl font-extrabold">{sales}</div>
                   </div>
 
+                  <div className="">
+                <BarChart
+                  width={500}
+                  height={300}
+                  data={chart}
+                  margin={{
+                    top: 20,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Bar
+                    dataKey="uv"
+                    fill="#8884d8"
+                    shape={<TriangleBar />}
+                    label={{ position: "top" }}
+                  >
+                    {chart.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={colors[index % 20]} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </div>
+
            
           </div>
 
@@ -180,10 +211,10 @@ const SaleSummryAdmin = () => {
 
                   <td>{item?.name}</td>
                   <td>{item.email}</td>
-                  <td>{item.shopName || "Name Empty"}</td>
+                  <td>{item.storeName || "Name Empty"}</td>
                   <td>
                     {item?.roll == "admin"
-                      ? "manager"
+                      ? "Admin"
                       : item.roll == "manager"
                       ? "manager"
                       : "Empty"}
@@ -219,7 +250,7 @@ const SaleSummryAdmin = () => {
         {pages.map((item, index) => (
           <button
             className={`w-7 h-7 flex justify-center items-center border border-[#7cb518] rounded-full ${
-              index === page ? "bg-[#7cb518]" : "bg-white"
+              index === page ? "bg-[red] text-white" : "bg-white"
             }`}
             key={index}
             onClick={() => setPage(index)}

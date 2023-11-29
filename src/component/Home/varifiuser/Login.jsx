@@ -1,8 +1,8 @@
-import { useContext } from "react";
+import { useContext} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MyContext } from "../../../Route/AuthProvider";
 import { toast } from "react-toastify";
-import PublicApi from "../../../Hook/PublicApi";
+
 import Users from "../../../Hook/Users";
 import { Helmet } from "react-helmet-async";
 import Google from "./Google";
@@ -10,12 +10,16 @@ import AdminSecoure from "../../../Hook/AdminSecoure";
 
 
 
+
+
 const Login = () => {
    
-    const Adminicsecure = AdminSecoure()
+    const adSecure = AdminSecoure()
     const {singWithEmailAndPassword}=useContext(MyContext)
     const navigator = useNavigate()
+
     const {refetch}=Users()
+ 
 
    const handelLogin = (e) =>{
     e.preventDefault()
@@ -24,10 +28,9 @@ const Login = () => {
 
   singWithEmailAndPassword(email,password)
 .then((res)=>{
- 
-  Adminicsecure.get(`/user?email=${res.user.email}`)
+  adSecure.get(`/user?email=${res?.user?.email}`)
     .then(res=>{
-      console.log(res.data);
+    
         if(res?.data?.roll=="manager"){
            refetch()
         navigator('/dasbord/projectManaget')
@@ -40,6 +43,8 @@ const Login = () => {
             navigator('/Create-Store')
         }
     })
+
+ 
     //navigator(singLocation?.state? singLocation.state :"/")
    return toast.success("Log In success")
      
