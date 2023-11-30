@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet-async";
 import sales from "../../../assets/saleng2.png";
 import invest from "../../../assets/invest.png";
 import profitImg from "../../../assets/profit.png";
+import totalProduct from "../../../assets/product-removebg-preview.png";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { useQuery } from "@tanstack/react-query";
 
@@ -79,18 +80,19 @@ const SalesSummry = () => {
   return (
     <div>
       {data?.users?.length == 0 ? (
-        "Product is Empty"
+        <div className="flex justify-center mt-[30vh] font-extrabold text-3xl text-pink-400">Product is Empty</div>
+        
       ) : (
         <div>
           <Helmet>
-            <title>StoreShop ||Sales Summary</title>
+            <title>StoreShop || Sales Summary</title>
           </Helmet>
           <div>
             <div className="grid xl:grid-cols-4 lg:grid-cols-3 gap-10 p-7 shadow">
               <div className="">
                 <div className="">
                   <div className="flex flex-col justify-center items-center">
-                    <img className="w-9" src={profitImg} alt="" />
+                    <img className="w-9" src={totalProduct} alt="" />
                     <div className="stat-desc text-xl">Total Product Sale</div>
 
                     <div className="stat-value">{data?.lengthData}</div>
@@ -202,7 +204,7 @@ const SalesSummry = () => {
                         <td>{item?.shopname}</td>
 
                         <td>
-                          {(data?.saleingPrice - data?.productCost).toFixed(3)}
+                          {((item?.sellingPrice) - (item?.ProductionCost)).toFixed(3)}
                         </td>
                         <td>{item?.date}</td>
                       </tr>

@@ -1,14 +1,11 @@
 import axios from "axios";
 
-
 const axiosSecure = axios.create({
-    baseURL:"http://localhost:5000"
-})
+  baseURL: "https://inventory-server-azure.vercel.app",
+});
 
 const AdminSecoure = () => {
-  
-  
-    return axiosSecure
+  return axiosSecure;
 };
 
 export default AdminSecoure;

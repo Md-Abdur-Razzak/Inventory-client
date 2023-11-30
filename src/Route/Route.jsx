@@ -62,12 +62,12 @@ export const myRoute = createBrowserRouter([{
         {
             path:"/dasbord/updateProduct/:id",
             element:<UpdateProduct></UpdateProduct>,
-            loader:({params})=>fetch(`http://localhost:5000/singleShopProduct/${params.id}`)
+            loader:({params})=>fetch(`https://inventory-server-azure.vercel.app/singleShopProduct/${params.id}`)
         },
         {
             path:"/dasbord/paymentCord/:id",
             element:<PaymentCard></PaymentCard>,
-            loader:({params})=>fetch(`http://localhost:5000/limit/${params.id}`)
+            loader:({params})=>fetch(`https://inventory-server-azure.vercel.app/limit/${params.id}`)
         },
         {
             path:"/dasbord/sales",
@@ -87,7 +87,7 @@ export const myRoute = createBrowserRouter([{
         {
             path:"/dasbord/paymentManager",
             element:<PaymentManager></PaymentManager>,
-            loader:()=>fetch('http://localhost:5000/limit')
+            loader:()=>fetch('https://inventory-server-azure.vercel.app/limit')
             
         },
         // ---------------------dasbord-------------
