@@ -1,5 +1,6 @@
 <h1>Inventory Management System</h1>
-<h3>Website Live link :  <a style="color: blue;" href="https://teal-clafoutis-b73476.netlify.app/" class="blue-link">Visit Website</a> </h3>
+<a style="color: blue;" href="https://teal-clafoutis-b73476.netlify.app/" class="blue-link">Live Link </a>
+<a style="color: blue;" href="https://github.com/Md-Abdur-Razzak/Inventory-client" class="blue-link">server Link</a>
 
 <h1>Features of my project</h1>
 <ul>
@@ -22,5 +23,9 @@
     <ol>Firebase</ol>
     <ol>Aos Animation</ol>
     <ol>Swiper js</ol>
+    <ol>React Stripe</ol>
+    <ol>Node.js</ol>
+    <ol>Express.js</ol>
+    <ol>MongoDB</ol>
     
 </ul>
