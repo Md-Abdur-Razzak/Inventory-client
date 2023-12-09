@@ -1,6 +1,10 @@
 <h1>Inventory Management System</h1>
-<a style="color: blue;" href="https://teal-clafoutis-b73476.netlify.app/" class="blue-link">Live Link </a>
-<a style="color: blue;" href="https://github.com/Md-Abdur-Razzak/Inventory-client" class="blue-link">server Link</a>
+<ul>
+    <li><a style="color: blue;" href="https://teal-clafoutis-b73476.netlify.app/" class="blue-link">Live Link </a></li>
+    <li><a style="color: blue;" href="https://github.com/Md-Abdur-Razzak/Inventory-client" class="blue-link">server Link</a></li>
+</ul>
+
+
 
 <h1>Features of my project</h1>
 <ul>
@@ -13,19 +17,19 @@
 
 <h1>Technology I used</h1>
 <ul>
-    <ol>React</ol>
-    <ol>React Router Dom</ol>
-    <ol>Tailwind CSS</ol>
-    <ol>Daisyui</ol>
-    <ol>React Icon</ol>
-    <ol>React Helmet</ol>
-    <ol>Axios</ol>
-    <ol>Firebase</ol>
-    <ol>Aos Animation</ol>
-    <ol>Swiper js</ol>
-    <ol>React Stripe</ol>
-    <ol>Node.js</ol>
-    <ol>Express.js</ol>
-    <ol>MongoDB</ol>
+     <li>React</li>
+    <li>React Router Dom</li>
+    <li>Tailwind CSS</li>
+    <li>Daisyui</li>
+    <li>React Icon</li>
+    <li>React Helmet</li>
+    <li>Axios</li>
+    <li>Firebase</li>
+    <li>Aos Animation</li>
+    <li>Swiper js</li>
+    <li>React Stripe</li>
+    <li>Node.js</li>
+    <li>Express.js</li>
+    <li>MongoDB</li>
     
 </ul>
