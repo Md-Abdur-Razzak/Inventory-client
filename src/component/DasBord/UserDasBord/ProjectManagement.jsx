@@ -50,11 +50,13 @@ const ProjectManagement = () => {
   return (
     <div className="w-[80%] mx-auto">
       <Helmet>
-        <title>StoreShop ||Product Management</title>
+        <title>StoreShop || Product Management</title>
       </Helmet>
       {data?.length == 0 ? (
         <div className="h-[80vh] flex flex-col justify-center items-center">
-          <h1 className="text-xl font-bold ">Please add a Product as You don't have any Product</h1>
+          <h1 className="text-xl font-bold ">
+            Please add a Product as You don't have any Product
+          </h1>
           <Link to={"/dasbord/addProduct"}>
             <button className="btn bg-red-400 text-white text-xl mt-9">
               Add Product
@@ -63,7 +65,7 @@ const ProjectManagement = () => {
         </div>
       ) : (
         <>
-          <div className="flex justify-between text-xl font-bold items-center">
+          <div className="flex justify-between text-xl font-bold items-center max-[420px]:flex-col gap-4">
             <h1 className="">Totall Product : {data?.length}</h1>
             <Link to={"/dasbord/addProduct"}>
               <button className="btn bg-red-400 text-white text-xl">

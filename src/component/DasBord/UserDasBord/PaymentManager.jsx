@@ -7,9 +7,9 @@ const PaymentManager = () => {
   return (
     <div>
       <Helmet>
-        <title>StoreShop ||Subscription & payment</title>
+        <title>StoreShop || Subscription & payment</title>
       </Helmet>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid md:grid-cols-3 grid-cols-2 gap-4">
         {data?.map((item) => {
           return (
            <Link to={`/dasbord/paymentCord/${item._id}`}  key={item._id}>

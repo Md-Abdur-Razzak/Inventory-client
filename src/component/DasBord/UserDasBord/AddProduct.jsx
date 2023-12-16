@@ -87,8 +87,8 @@ const AddProduct = () => {
       <Helmet>
         <title>StoreShop ||Add Product </title>
       </Helmet>
-      <div className="form-control">
-        <div className="hero min-h-screen dark:bg-black">
+      <div className="form-control ">
+        <div className="hero min-h-screen ">
           <div className="hero-content w-[80%] max-[769px]:w-[90%] flex-col ">
             <div className="text-center ">
               <h1 className="text-5xl font-bold">Products add </h1>

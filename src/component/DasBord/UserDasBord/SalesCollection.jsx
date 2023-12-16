@@ -54,13 +54,13 @@ const SalesCollection = () => {
     const id = e.target.serch.value;
 
     const filter = salesDataStart?.filter((serch) => serch._id == id);
-    console.log(filter);
+ 
     setSalesData(filter);
   };
   return (
     <div>
       <Helmet>
-        <title>StoreShop ||Sales Collection</title>
+        <title>StoreShop || Sales Collection</title>
       </Helmet>
       {salesDataStart.length == 0 ? (
         <div className=" mt-[30vh] flex  justify-center items-center text-3xl font-extrabold text-pink-400"><h1>Sales Callection Is Empty</h1></div>
@@ -71,7 +71,7 @@ const SalesCollection = () => {
               <form onSubmit={handelSearch}>
                 <input
                   name="serch"
-                  className="input px-44 input-bordered join-item"
+                  className="input md:px-44 input-bordered join-item"
                   placeholder="Id : 6560ef61732cfc2132c97c7d"
                 />
                 <button className="btn join-item rounded-r-full">search</button>

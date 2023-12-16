@@ -33,17 +33,15 @@ const Google = () => {
             const name = res?.user?.displayName
             const email = res?.user?.email
             const userInfo = { name, display_url, email };
-            console.log(userInfo);
+           
             publicAxiosApi.post("/user", userInfo)
-            .then(res=>{
-            console.log(res.data);
-            })
+            .then(res=>{console.log()})
         
         
 
             publicAxiosApi.get(`/user?email=${res.user.email}`)
             .then(res=>{
-              console.log(res.data);
+      
                 if(res?.data?.roll=="manager"){
                    refetch()
                   navigator('/dasbord/projectManaget')

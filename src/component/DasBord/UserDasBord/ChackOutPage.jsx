@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
 import Loding from "../../Home/loder/Loding";
+import { FcPaid } from "react-icons/fc";
 
 const ChackOutPage = () => {
   // salesProduct
@@ -140,9 +141,9 @@ const ChackOutPage = () => {
                               item?._id
                             )
                           }
-                          className="text-xl btn text-white bg-red-500"
+                          className="text-2xl btn text-white bg-green-300"
                         >
-                          Get Paid
+                          <FcPaid></FcPaid>
                         </button>
                       </td>
                     </tr>
