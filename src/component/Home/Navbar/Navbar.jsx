@@ -88,6 +88,7 @@ const Navbar = () => {
                 
                 {data?.manager ? (
                   <NavLink
+                  style={{color:'green'}}
                     to={"/dasbord/projectManaget"}
                     className={({ isActive, isPending }) =>
                       isActive
@@ -97,13 +98,16 @@ const Navbar = () => {
                         : ""
                     }
                   >
-                    {user ? "Dashboard" : ""}
+                <h1 className="text-green-400"> {user ? "Dashboard" : ""}</h1>
+
+                    
                   </NavLink>
                 ) : (
                   ""
                 )}
                 {data?.admin ? (
                   <NavLink
+                
                     to={"/dasbord/manageshop"}
                     className={({ isActive, isPending }) =>
                       isActive
@@ -113,7 +117,7 @@ const Navbar = () => {
                         : ""
                     }
                   >
-                    {user ? "Dashboard" : ""}
+                  <h1 className="text-green-400"> {user ? "Dashboard" : ""}</h1>
                   </NavLink>
                 ) : (
                   ""
@@ -191,7 +195,8 @@ const Navbar = () => {
                   : ""
               }
             >
-              {user ? "Dashboard" : ""}
+              <h1 className="text-green-400"> {user ? "Dashboard" : ""}</h1>
+              
             </NavLink>
           ) : (
             ""
@@ -207,7 +212,8 @@ const Navbar = () => {
                   : ""
               }
             >
-              {user ? "Dashboard" : ""}
+              <h1 className="text-green-400"> {user ? "Dashboard" : ""}</h1>
+            
             </NavLink>
           ) : (
             ""

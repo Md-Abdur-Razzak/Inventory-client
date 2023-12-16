@@ -4,7 +4,7 @@ import { FaFacebook, FaGithub, FaMobileAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 const Footer = () => {
   return (
-    <div className="mt-[100px] bg-[#1f4b8e] lg:h-[400px] md:h-[900px] ">
+    <div className="mt-[100px] bg-[rgb(31,75,100)] lg:h-[400px] md:h-[900px] ">
       <div className="md:flex md:justify-between flex-wrap  w-[80%] bg-red pt-[100px] mx-auto text-white">
         <div className="md:w-[300px] flex flex-col justify-center items-center gap-3 ">
           <img className="w-9" src={logo} alt="" />

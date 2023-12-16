@@ -9,7 +9,7 @@ const PaymentCard = () => {
     const data=useLoaderData()
     return (
         <div className=''>
-           <div className='w-[50%]'>
+           <div className='w-[90%] flex flex-col justify-center items-center  '>
            <Elements stripe={stripePromise}>
                  <ChackOutFrom data={data}></ChackOutFrom>
             </Elements>
