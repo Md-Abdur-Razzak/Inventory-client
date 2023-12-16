@@ -12,15 +12,15 @@ const Navbar = () => {
     <div className="navbar  bg-base-100 dark:text-white dark:bg-[#191945c1] sticky inset-0 z-10  rounded-none   bg-opacity-30  text-black backdrop-blur-2xl backdrop-saturate-200 lg:px-2 md:py-4 max-[769px]:py-9">
       <div className="navbar-start ">
         <div className="">
-        <div className="drawer lg:hidden">
+          <div className="drawer lg:hidden">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">
               {/* Page content here */}
               <label
                 htmlFor="my-drawer"
-                className="btn bg-red-500 font-bold drawer-button"
+                className="btn bg-red-500  drawer-button text-white "
               >
-                <AiOutlineBars/>
+                <AiOutlineBars />
               </label>
             </div>
             <div className="drawer-side   z-50">
@@ -29,105 +29,102 @@ const Navbar = () => {
                 aria-label="close sidebar"
                 className="drawer-overlay"
               ></label>
-                   <ul
-            tabIndex={0}
-            className="  menu p-4 w-80 min-h-full  text-base-content text-xl dropdown-content  shadow bg-pink-100  "
-          >
-            <NavLink
-              to={"/"}
-              className={({ isActive, isPending }) =>
-                isActive
-                  ? " text-white bg-red-500 btn"
-                  : isPending
-                  ? "pending"
-                  : ""
-              }
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to={"/Create-Store"}
-              className={({ isActive, isPending }) =>
-                isActive
-                  ? " text-white bg-red-500 btn"
-                  : isPending
-                  ? "pending"
-                  : ""
-              }
-            >
-              Create-Store
-            </NavLink>
-            <NavLink
-              to={"/Watch-Demo"}
-              className={({ isActive, isPending }) =>
-                isActive
-                  ? " text-white bg-red-500 btn"
-                  : isPending
-                  ? "pending"
-                  : ""
-              }
-            >
-              Watch Demo
-            </NavLink>
-
-            <NavLink
-              to={"/registration"}
-              className={({ isActive, isPending }) =>
-                isActive
-                  ? " text-white bg-red-500 btn"
-                  : isPending
-                  ? "pending"
-                  : ""
-              }
-            >
-              Registration
-            </NavLink>
-            {data?.manager ? (
-              <NavLink
-                to={"/dasbord/projectManaget"}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? " text-white bg-red-500 btn"
-                    : isPending
-                    ? "pending"
-                    : ""
-                }
+              <ul
+                tabIndex={0}
+                className="  menu p-4 py-9 md:w-80 w-52 min-h-full  text-base-content text-xl dropdown-content  shadow bg-pink-100  "
               >
-                {user ? "Dashboard" : ""}
-              </NavLink>
-            ) : (
-              ""
-            )}
-            {data?.admin ? (
-              <NavLink
-                to={"/dasbord/manageshop"}
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? " text-white bg-red-500 btn"
-                    : isPending
-                    ? "pending"
-                    : ""
-                }
-              >
-                {user ? "Dashboard" : ""}
-              </NavLink>
-            ) : (
-              ""
-            )}
-          </ul>
+                <NavLink
+                  to={"/"}
+                  className={({ isActive, isPending }) =>
+                    isActive
+                      ? " text-white bg-red-500 btn"
+                      : isPending
+                      ? "pending"
+                      : ""
+                  }
+                >
+                  Home
+                </NavLink>
+                <hr className="border-2 border-red-500"/>
+                <NavLink
+                  to={"/Create-Store"}
+                  className={({ isActive, isPending }) =>
+                    isActive
+                      ? " text-white bg-red-500 btn"
+                      : isPending
+                      ? "pending"
+                      : ""
+                  }
+                >
+                  Create-Store
+                </NavLink>
+                <hr className="border-2 border-red-500"/>
+                <NavLink
+                  to={"/Watch-Demo"}
+                  className={({ isActive, isPending }) =>
+                    isActive
+                      ? " text-white bg-red-500 btn"
+                      : isPending
+                      ? "pending"
+                      : ""
+                  }
+                >
+                  Watch Demo
+                </NavLink>
+                <hr className="border-2 border-red-500"/>
 
-
-
-              
+                <NavLink
+                  to={"/registration"}
+                  className={({ isActive, isPending }) =>
+                    isActive
+                      ? " text-white bg-red-500 btn"
+                      : isPending
+                      ? "pending"
+                      : ""
+                  }
+                >
+                  Registration
+                </NavLink>
+                
+                {data?.manager ? (
+                  <NavLink
+                    to={"/dasbord/projectManaget"}
+                    className={({ isActive, isPending }) =>
+                      isActive
+                        ? " text-white bg-red-500 btn"
+                        : isPending
+                        ? "pending"
+                        : ""
+                    }
+                  >
+                    {user ? "Dashboard" : ""}
+                  </NavLink>
+                ) : (
+                  ""
+                )}
+                {data?.admin ? (
+                  <NavLink
+                    to={"/dasbord/manageshop"}
+                    className={({ isActive, isPending }) =>
+                      isActive
+                        ? " text-white bg-red-500 btn"
+                        : isPending
+                        ? "pending"
+                        : ""
+                    }
+                  >
+                    {user ? "Dashboard" : ""}
+                  </NavLink>
+                ) : (
+                  ""
+                )}
+              </ul>
             </div>
           </div>
-
-         
-         
         </div>
-        <div className="md:flex flex-col justify-center items-center max-[320px]:hidden">
-          <img src={logo} className="xl:w-[100px] w-[80px]" />
-          <h1 className="xl:text-2xl font-extrabold max-[426px]:text-sm">
+        <div className="md:flex flex-col justify-center ml-[70px] items-center hidden">
+          <img src={logo} className="xl:w-[70px] w-[70px]" />
+          <h1 className="xl:text-2xl font-extrabold ">
             STORE<span className="text-red-400">SHOP</span>
           </h1>
         </div>
